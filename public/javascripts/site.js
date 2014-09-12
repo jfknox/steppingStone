@@ -1,44 +1,52 @@
-console.log('client')
+app = angular.module('ngModalDemo', ['ngModal']);
+app.config(function(ngModalDefaultsProvider) {
+  return ngModalDefaultsProvider.set({
+    closeButtonHtml: "<i class='fa fa-times'></i>"
+  });
+});
 
-//find all destory links
+app.factory('nodeJsServer', function($http) {
+   return {
+        getUsers: function() {
+             //return the promise directly.
+			return $http.get("/users").then(function(result) {
+                //resolve the promise as the data
+                return result.data;
+            });
+        },
+        updateUser: function(user) {
+        	$http.put('/users/' + user._id, user);
+        }
+   }
+});
 
-//for every destory link
-  //on click:
-     //ajax call to delete the user
-     //(Make sure to pass in the user id
+app.controller('stepStoneController', function($scope, nodeJsServer) {
+  $scope.modalShown = false;
+  $scope.email = '';
+  $scope.username = '';
+  $scope.password = '';
 
+    nodeJsServer.getUsers().then(function(users) {
+        $scope.users = users;
+    });
 
+  $scope.logClose = function() {
+  	$scope.currentuser = undefined;
+    console.log('close!');
+  };
+  $scope.toggleModal = function(user) {
+    $scope.modalShown = !$scope.modalShown;
+    $scope.currentuser = user;
+  };
 
-
-//Get all destroy links using jquery
-//We can do this without document.ready() because this js is loaded at the bottom
-var destoryLinks = $('.destroyLink')
-
-//Using jquery, setup an event handler
-destoryLinks.on('click', function() {
-	var answer = confirm('Are you sure?')
-	if(answer) {
-		//If they answered yes, make an ajax call
-		var $this = $(this);
-		var userId = this.getAttribute('data-id');
-		var $request = $.ajax({
-			url: '/users/delete/' + userId,
-			type: 'POST'
-		});
-		//Callback if call to nodejs server was successful
-		$request.done(function(data) {
-			//Its possible that mongodb failed, so check for that
-			if(data.err) {
-				console.log(data.err);
-			} else {
-				$this.parent().parent().remove();
-			}
-		});
-		//Callback if call to nodejs server failed (ex, nodejs server not running)
-		$request.fail(function() {
-			console.log('fail')
-		});
-	} else {
-		console.log('user clicked no')
-	}
+  $scope.editUser = function(user) {
+  	//BUG: Not able to get new values from form yet
+  	user.email = $scope.email || user.email;
+  	user.username = $scope.username || user.username;
+  	user.password = $scope.password || user.password;
+  	nodeJsServer.updateUser(user);
+	$scope.email = '';
+	$scope.username = '';
+	$scope.password = '';
+  }
 });

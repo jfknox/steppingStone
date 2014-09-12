@@ -1,8 +1,13 @@
 var express = require('express');
 module.exports = app = express();
-var model       = require('./models'),
-    controller = require('./controllers');
 
-app.get('/:id', controller.readUser)
+var controller = require('./controllers');
 
-app.post('/', controller.createUser)
+app.route('/')
+.get(controller.getAllUsers)
+.post(controller.createUser);
+
+app.route('/:id')
+.get(controller.readUser)
+.put(controller.updateUser)
+.delete(controller.deleteUser);
