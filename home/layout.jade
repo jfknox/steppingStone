@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/boiler_plate_style.css')
+    link(rel='stylsheet', href='stylesheet/pure_style.css')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    title
+    meta(name='description', content='')
+    meta(name='author', content='')
+    meta(name='viewport', content='width=device-width,initial-scale=1')
+    script(src='javascripts/libs/modernizr-2.0.6.min.js')
+  body
+    #header-container
+      header.wrapper.clearfix
+        h1#title
+          a#title(href='/')  Stepping Stone 
+        nav
+          ul
+            li
+              a(href='/users') Users
+            li
+              a(href='#') Posts
+            li
+              a(href='#') Profile
+
+    block content
+    #footer-container
+      footer.wrapper
+        h3 footer
+
+
+
+
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(src='/javascripts/site.js', type='text/javascript')
