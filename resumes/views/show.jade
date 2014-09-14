@@ -6,17 +6,20 @@ div(ng-controller='resumeShowController')
 
 	.resumeText	{{resume.resumeText}}
 
+	.name {{resume.userName}}
 
-	form.pure-form.pure-form-aligned(ng-submit='editResume()')
-		fieldset
-			.pure-control-group
-				label(for='POST-industry') Industry:
-				input#POST-industry(type='text', ng-model='industry') 
-			.pure-control-group
-				label(for='POST-description') Description:
-				input#POST-description(type='text', ng-model='description')
-			.pure-control-group
-				label(for='POST-resumeText') resumeText:
-				input#POST-resumeText(type='text', ng-model='resumeText')
-			.pure-controls
-				button.pure-button.pure-button-primary(type='submit') Update Resume
+	.modal(ng-show='userId === resume.userId')
+		form.pure-form.pure-form-aligned(ng-submit='editResume()')
+			fieldset
+				.pure-control-group
+					label(for='POST-industry') Industry:
+					input#POST-industry(type='text', ng-model='industry') 
+				.pure-control-group
+					label(for='POST-description') Description:
+					input#POST-description(type='text', ng-model='description')
+				.pure-control-group
+					label(for='POST-resumeText') resumeText:
+					input#POST-resumeText(type='text', ng-model='resumeText')
+				.pure-controls
+					button.pure-button.pure-button-primary(type='submit') Update Resume
+		button.pure-button.pure-button-primary(ng-click= "deleteResume()") Delete

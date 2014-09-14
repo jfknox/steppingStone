@@ -15,12 +15,12 @@ app.get('/show.html', controller.getResumeShowTemplate);
 
 app.route('/').
 get(controller.getAllResumes).
-post(controller.createResumes);
+post(controller.createResume);
 
 app.route('/:id').
-get(controller.readResumes).
-put(controller.updateResumes).
-delete(controller.deleteResumes);
+get(controller.getResume).
+put(controller.updateResume).
+delete(controller.deleteResume);
 
 
 

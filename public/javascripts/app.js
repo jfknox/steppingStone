@@ -4,21 +4,17 @@ app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/resumes', {
-        templateUrl: 'resumes/index.html',
-        controller: 'ResumeListController'
+        templateUrl: 'resumes/index.html'
       }).
       when('/resumes/:id', {
-        templateUrl: 'resumes/show.html',
-        controller: 'resumeShowController'
+        templateUrl: 'resumes/show.html'
       }).
 
       when('/home', {
-        templateUrl: 'home/index.html',
-        controller: 'HomeController'
+        templateUrl: 'home/index.html'
       }).
       when('/users', {
-        templateUrl: 'users/index.html',
-        controller: 'usersController'
+        templateUrl: 'users/index.html'
       }).
       otherwise({
         redirectTo: '/home'

@@ -24,6 +24,9 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
 				success(function (newResume) {
 					console.log("new Success");
 					$scope.resumes.push(newResume);
+					$scope.industry = ''
+					$scope.description = ''
+					$scope.resumeText = ''
 				}).
 				error(function() {
 					console.log("new error")
@@ -32,12 +35,12 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
 }]);
 
 
-
-
-
-steppingStoneControllers.controller('resumeShowController', ['$scope', '$routeParams', 'resumeFactory',
-	function($scope, $routeParams, $resumeFactory) {
+steppingStoneControllers.controller('resumeShowController', ['$scope', '$routeParams', '$cookies', '$location', 'resumeFactory',
+	function($scope, $routeParams, $cookies, $location, $resumeFactory) {
 		console.log('resume show controller')
+
+		$scope.userId = $cookies.userId;
+
 		$resumeFactory.getResume($routeParams.id).
 			success(function (resume) {
 				$scope.resume = resume
@@ -59,6 +62,19 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 					console.log("edit error")
 				})		
 		}
+
+		$scope.deleteResume = function() {
+			$resumeFactory.deleteResume($scope.resume._id).
+				success(function() {
+					console.log("edit Success");
+					$location.path('/resumes');
+				}).
+				error(function() {
+					console.log("delete error")
+				})
+		}
+
+
 
 	}
 

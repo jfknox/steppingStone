@@ -5,7 +5,9 @@ var UserSchema   = new Schema({
 	description: String,
 	industry: String,
 	resumeText: String,
-	date: Date
+	date: Date,
+	userId: String, 
+	userName: String
 
 });
 

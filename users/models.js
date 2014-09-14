@@ -3,9 +3,8 @@ var findOrCreate = require('mongoose-findorcreate')
 var Schema       = mongoose.Schema;
 
 var UserSchema   = new Schema({
-	username: String,
-	email: String,
-	password: String
+	name: String,
+	linkedinId: String
 });
 
 UserSchema.plugin(findOrCreate);

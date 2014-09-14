@@ -1,17 +1,16 @@
-var express      = require('express'),
-    path         = require('path'),
-    http         = require('http'),
-    session      = require('express-session'),
-    app          = express(),
-    bodyParser   = require('body-parser'),
-    passport = require('passport'),
-    cookieParser = require('cookie-parser'),
-    port    = 3000,
+var express          = require('express'),
+    path             = require('path'),
+    http             = require('http'),
+    session          = require('express-session'),
+    app              = express(),
+    bodyParser       = require('body-parser'),
+    passport         = require('passport'),
+    cookieParser     = require('cookie-parser'),
     LinkedInStrategy = require('passport-linkedin').Strategy,
-    User = require('./users/models');
+    User             = require('./users/models'),
+    mongoose         = require('mongoose');
 
-//Get mongoose library
-var mongoose = require('mongoose');
+
 // Connect to remote mongo database hosted on monogolab.com
 //remember to put in mongo db lab account info
 mongoose.connect('mongodb://School_of_Devs:jeremy@ds033740.mongolab.com:33740/stepping_stone_sod');
@@ -24,10 +23,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-var LINKEDIN_API_KEY = "75qkg18qrbqlkq";
-var LINKEDIN_SECRET_KEY = "S31fgUjalKvL7DCs";
-
-
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -36,7 +31,8 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-
+var LINKEDIN_API_KEY = "75qkg18qrbqlkq";
+var LINKEDIN_SECRET_KEY = "S31fgUjalKvL7DCs";
 
 passport.use(new LinkedInStrategy({
     consumerKey: LINKEDIN_API_KEY,
@@ -63,7 +59,17 @@ passport.use(new LinkedInStrategy({
   }
 ));
 
+app.use(function(req, res, next) {
+  //If user signed in, save it to cookies so angular knows whats up
+  if(req.user) {
+    res.cookie('userId', req.user._id)
+  } else {
+    res.clearCookie('userId')
+  }
 
+  //Continue on
+  next();
+});
 
 var layout = require('./layouts'),
     home = require('./home'),
@@ -79,6 +85,4 @@ app.use('/users', user);
 app.use('/auth', auth);
 //app.use('/comments', comments);
 
-
-
-module.exports = http.createServer(app).listen(port);
+module.exports = http.createServer(app).listen(3000);

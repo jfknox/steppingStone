@@ -20,6 +20,10 @@ app.factory('resumeFactory', function($http) {
                 resumeText: resumeText
             });
 
+        },
+        deleteResume: function(id) {
+            return $http.delete(/resumes/ + id)
         }
+
     }
 });
