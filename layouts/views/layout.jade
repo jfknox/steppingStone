@@ -15,12 +15,16 @@ html(data-ng-app='steppingStone')
           a#title(href='#/home')  Stepping Stone 
         nav
           ul
-            li
-              a(href='#/resumes') Resumes
-            li
-              a(href='#/users') Users
-            li
-              a(href='#') Profile
+            if user
+              li
+                a(href='#/resumes') Resumes
+              li
+                a(href='#') Profile
+              li
+                a(href='/auth/signout') Signout
+            else
+              li
+                a(href='/auth/linkedin') Signin
 
     //-block content
     .view-container
