@@ -1,17 +1,25 @@
 app.factory('resumeFactory', function($http) {
    return {
-        showAllResumes: function() {
+        getAllResumes: function() {
             return $http.get('/resumes/');
         },
-        newResume: function(industry, description, resumeText) {
+        saveNewResume: function(industry, description, resumeText) {
             return $http.post('/resumes/', {
                 description: description,
                 industry: industry, 
                 resumeText: resumeText
             });
         },
-        showResume: function(id) {
+        getResume: function(id) {
             return $http.get('/resumes/' + id );
+        },
+        updateResume: function(id, industry, description, resumeText) {
+            return $http.put(/resumes/ + id , {
+                description: description,
+                industry: industry, 
+                resumeText: resumeText
+            });
+
         }
     }
 });

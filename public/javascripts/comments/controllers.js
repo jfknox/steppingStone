@@ -1,1 +1,1 @@
-var steppingStoneControllers = angular.module('steppingStoneControllers', []);
+var steppingStoneControllers = angular.module('steppingStoneControllers');

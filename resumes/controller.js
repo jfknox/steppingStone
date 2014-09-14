@@ -56,12 +56,11 @@ exports.readResumes = function (req,res) {
 }
 
 exports.updateResumes = function (req,res) {
-	var description = req.description('description')
-	var industry = req.industry('industry')
-	var resumeText = req.resumeText('resumeText')
-	var date = req.date('date')
+	var description = req.param('description')
+	var industry = req.param('industry')
+	var resumeText = req.param('resumeText')
 
-	Resume.findByIdAndUpdate(resumeid, { description: description, industry: industry, resumeText: resumeText }, function(err, resume) {
+	Resume.findByIdAndUpdate(req.params.id, { description: description, industry: industry, resumeText: resumeText }, function(err, resume) {
 		//if theres an error saving, notify the resume
 		if(err) {
 			console.log(err);
