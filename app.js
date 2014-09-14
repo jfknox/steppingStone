@@ -17,16 +17,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var home = require('./home'),
-    user = require('./users')
-    //resumes = require('./resumes'), 
-    //comments= require('./comments'), 
-    //auth    = require('./auth');
+var layout = require('./layouts'),
+    home = require('./home'),
+    user = require('./users'),
+    resumes = require('./resumes'),
+    comments= require('./comments'), 
+    auth    = require('./auth');
 
-app.use(home);
+app.use(layout);
+app.use('/home', home);
+app.use('/resumes', resumes);
 app.use('/users', user);
 //app.use('/auth', auth);
-//app.use('/resumes', resumes);
 //app.use('/comments', comments);
 
 

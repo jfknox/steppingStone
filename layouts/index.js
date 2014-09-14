@@ -8,4 +8,4 @@ app.set('view engine', 'jade');
 
 var controller = require('./controllers');
 
-app.get('/index.html', controller.getHomePage)
+app.get('/', controller.getMasterLayout)

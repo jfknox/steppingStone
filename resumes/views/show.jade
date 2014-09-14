@@ -1,0 +1,22 @@
+h1= title
+div(ng-controller='resumeShowController')   
+	.industry {{resume.industry}}
+
+	.description {{resume.description}}
+
+	.resumeText	{{resume.resumeText}}
+
+
+	form.pure-form.pure-form-aligned(ng-submit='editResume()')
+		fieldset
+			.pure-control-group
+				label(for='POST-industry') Industry:
+				input#POST-industry(type='text', ng-model='industry') 
+			.pure-control-group
+				label(for='POST-description') Description:
+				input#POST-description(type='text', ng-model='description')
+			.pure-control-group
+				label(for='POST-resumeText') resumeText:
+				input#POST-resumeText(type='text', ng-model='resumeText')
+			.pure-controls
+				button.pure-button.pure-button-primary(type='submit') Update Resume

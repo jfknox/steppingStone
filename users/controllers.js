@@ -12,6 +12,10 @@ exports.getAllUsers = function(req, res) {
 	});
 }
 
+exports.getUserIndex = function(req, res) {
+	res.render('index', { title: 'User Index' });
+}
+
 exports.createUser = function (req,res) {
 	var username = req.param('username')
 	var email = req.param('email')
