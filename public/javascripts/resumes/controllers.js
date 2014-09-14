@@ -1,9 +1,5 @@
 var steppingStoneControllers = angular.module('steppingStoneControllers', []);
 
-steppingStoneControllers.controller('HomeController', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
-  	console.log('home controller')
-  }]);
 
 steppingStoneControllers.controller('ResumeListController', ['$scope', '$routeParams', 'resumeFactory',
   	function($scope, $routeParams, $resumeFactory) {
@@ -36,6 +32,7 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
 }]);
 
 
+
 steppingStoneControllers.controller('resumeShowController', ['$scope', '$routeParams', 'resumeFactory',
   function($scope, $routeParams, $resumeFactory) {
 	console.log('resume show controller')
@@ -50,7 +47,3 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 		}
 ]);
 
-steppingStoneControllers.controller('usersController', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
-	console.log('user list controller')
-  }]);

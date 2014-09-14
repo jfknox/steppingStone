@@ -21,8 +21,7 @@ var layout = require('./layouts'),
     home = require('./home'),
     user = require('./users'),
     resumes = require('./resumes'),
-    comments= require('./comments'), 
-    auth    = require('./auth');
+    comments= require('./comments');
 
 app.use(layout);
 app.use('/home', home);
