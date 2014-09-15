@@ -203,7 +203,7 @@ a.pure-button-primary {
 
 /* This is the class used for the content sub-headers (<h3>) */
 .content-subhead {
-    color: #1f8dd6;
+    color: black;
 }
     .content-subhead i {
         margin-right: 7px;
@@ -211,7 +211,7 @@ a.pure-button-primary {
 
 /* This is the class used for the dark-background areas. */
 .ribbon {
-    background: #2d3e50;
+    background: rgb(31,33,36);
     color: #aaa;
 }
 
