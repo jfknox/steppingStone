@@ -17,7 +17,7 @@ exports.getResumeIndexTemplate = function(req, res) {
 }
 
 exports.getResumeShowTemplate = function (req, res) {
-	res.render('show', {title: "Show Resume"});
+	res.render('show', {title: "Show Resume", user: req.user});
 }
 
 exports.createResume = function (req,res) {
