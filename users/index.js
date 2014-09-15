@@ -13,11 +13,9 @@ app.get('/index.html', controller.getUserIndex);
 
 app.route('/')
 .get(controller.getAllUsers)
-.post(controller.createUser);
 
 app.route('/:id')
 .get(controller.readUser)
-.put(controller.updateUser)
-.delete(controller.deleteUser);
+
 
 

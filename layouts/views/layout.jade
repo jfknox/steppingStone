@@ -17,14 +17,19 @@ html(data-ng-app='steppingStone')
   body
     .header
     .home-menu.pure-menu.pure-menu-open.pure-menu-horizontal.pure-menu-fixed
-        a.pure-menu-heading(href='') Stepping Stone
+        a.pure-menu-heading(href='#/home') Stepping Stone
         ul
-          li.pure-menu-selected
-            a(href='#') Home
-          li
-            a(href='#') Tour
-          li
-            a(href='#') Sign Up
+            if user
+                li
+                    a(href='#/resumes') Resumes
+                li
+                    a(href='#') Profile
+                li
+                    a(href='/auth/signout') Signout
+            else
+                li
+                    a(href='/auth/linkedin') Signin
+
 
    
 
