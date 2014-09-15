@@ -69,7 +69,10 @@ div {
   }
 }
 
+#home-background-image{
 
+  background: url(/imgAssets/stepping_stones.jpg);
+}
 
 
 
