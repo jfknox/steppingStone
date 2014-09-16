@@ -75,14 +75,15 @@ var layout = require('./layouts'),
     home = require('./home'),
     user = require('./users'),
     resumes = require('./resumes'),
-    comments= require('./comments'),
-    auth= require('./auth');
+    comments = require('./comments'),
+    auth = require('./auth');
+
 
 app.use(layout);
 app.use('/home', home);
 app.use('/resumes', resumes);
 app.use('/users', user);
 app.use('/auth', auth);
-//app.use('/comments', comments);
+app.use('/comments', comments);
 
 module.exports = http.createServer(app).listen(3000);

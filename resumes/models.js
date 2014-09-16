@@ -1,7 +1,7 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
-var UserSchema   = new Schema({
+var ResumeSchema   = new Schema({
 	description: String,
 	industry: String,
 	resumeText: String,
@@ -11,4 +11,4 @@ var UserSchema   = new Schema({
 
 });
 
-module.exports = mongoose.model('Resume', UserSchema);
+module.exports = mongoose.model('Resume', ResumeSchema);

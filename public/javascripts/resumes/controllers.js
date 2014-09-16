@@ -35,8 +35,8 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
 }]);
 
 
-steppingStoneControllers.controller('resumeShowController', ['$scope', '$routeParams', '$cookies', '$location', 'resumeFactory',
-	function($scope, $routeParams, $cookies, $location, $resumeFactory) {
+steppingStoneControllers.controller('resumeShowController', ['$scope', '$routeParams', '$cookies', '$location', 'resumeFactory', 'commentFactory', 
+	function($scope, $routeParams, $cookies, $location, $resumeFactory, $commentFactory) {
 		console.log('resume show controller')
 
 		$scope.userId = $cookies.userId;
@@ -74,6 +74,26 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 				})
 		}
 
+		$commentFactory.getAllComments($routeParams.id).
+			success(function (comments) {
+				$scope.comments = comments
+
+			}).
+			error(function() {
+				console.log("comment show error")
+			})
+
+		$scope.createComment = function() {
+			$commentFactory.createComment($scope.content, $scope.resume._id).
+				success(function(newComment) {
+					console.log("left Comment");
+					$scope.comments.push(newComment);
+					$scope.content = ""
+				}).
+				error(function() {
+					console.log("comment error")
+				});
+		}
 
 
 	}
