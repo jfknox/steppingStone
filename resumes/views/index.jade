@@ -5,15 +5,31 @@ div(ng-controller='ResumeListController')
       form(role='search')
         .form-group
           input#search(type='text', placeholder='Resume Search', ng-model='searchText')
-      article
-        header
-          div(x-ng-repeat="resume in resumes | filter:searchText")
-            .tile
-              h2 {{resume.industry}}
-              p {{resume.description}} 
-              p {{resume.resumeText}} 
+        .posts
+          h1.content-subhead Recent Posts
+           div.resume-container(x-ng-repeat="resume in resumes | filter:searchText")
+            section.post
+              h2.post-title {{resume.industry}} 
+              .post-description
+              p {{resume.description}}
               p {{resume.date}}
               a(href="#/resumes/{{resume._id}}") Show
+              
+
+  //- #main-container
+  //-   #main.wrapper.clearfix
+  //-     form(role='search')
+  //-       .form-group
+  //-         input#search(type='text', placeholder='Resume Search', ng-model='searchText')
+  //-     article
+  //-       header
+  //-         div(x-ng-repeat="resume in resumes | filter:searchText")
+  //-           .tile
+  //-             h2 {{resume.industry}}
+  //-             p {{resume.description}} 
+  //-             p {{resume.resumeText}} 
+  //-             p {{resume.date}}
+  //-             a(href="#/resumes/{{resume._id}}") Show
 
   if user
     form.pure-form.pure-form-aligned(ng-submit='newResume()')
