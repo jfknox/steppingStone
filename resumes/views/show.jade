@@ -8,7 +8,26 @@ div(ng-controller='resumeShowController')
 
 	.name {{resume.userName}}
 
+	form(role='search')
+		.form-group
+			input#search(type='text', placeholder='Search in Comments', ng-model='searchText')
+		article
+		header
+			div(x-ng-repeat="comment in comments | filter:searchText")
+				.tile
+					p {{comment.content}}
+					p {{comment.userName}}  
+					p {{comment.date}}
+					a.pure-button(ng-show='userId === comment.userId', ng-click= "deleteComment(comment._id)") Delete
 	if user
+		form(ng-submit='createComment()')
+			label.pure-checkbox
+				input#private(type="checkbox", ng-model="anonymous")
+				| Post Anonymously?
+			.pure-u-1
+				textarea.pure-input-1(rows="6" cols="70")(ng-model='content' placeholder="Comment here!!")
+			.pure-controls
+				button.pure-button(type='submit') Leave Comment
 		.modal(ng-show='userId === resume.userId')
 			form.pure-form.pure-form-aligned(ng-submit='editResume()')
 				fieldset
@@ -22,5 +41,5 @@ div(ng-controller='resumeShowController')
 						label(for='POST-resumeText') resumeText:
 						input#POST-resumeText(type='text', ng-model='resumeText')
 					.pure-controls
-						button.pure-button.pure-button-primary(type='submit') Update Resume
-						button.pure-button.pure-button-primary(ng-click= "deleteResume()") Delete
+						button.pure-button(type='submit') Update Resume
+						button.pure-button(ng-click= "deleteResume()") Delete

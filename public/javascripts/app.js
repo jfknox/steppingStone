@@ -13,8 +13,8 @@ app.config(['$routeProvider',
       when('/home', {
         templateUrl: 'home/index.html'
       }).
-      when('/users', {
-        templateUrl: 'users/index.html'
+      when('/profile', {
+        templateUrl: 'users/profile.html'
       }).
       otherwise({
         redirectTo: '/home'

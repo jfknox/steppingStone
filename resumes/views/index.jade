@@ -13,23 +13,7 @@ div(ng-controller='ResumeListController')
               .post-description
               p {{resume.description}}
               p {{resume.date}}
-              a(href="#/resumes/{{resume._id}}") Show
-              
-
-  //- #main-container
-  //-   #main.wrapper.clearfix
-  //-     form(role='search')
-  //-       .form-group
-  //-         input#search(type='text', placeholder='Resume Search', ng-model='searchText')
-  //-     article
-  //-       header
-  //-         div(x-ng-repeat="resume in resumes | filter:searchText")
-  //-           .tile
-  //-             h2 {{resume.industry}}
-  //-             p {{resume.description}} 
-  //-             p {{resume.resumeText}} 
-  //-             p {{resume.date}}
-  //-             a(href="#/resumes/{{resume._id}}") Show
+              a.pure-button(href="#/resumes/{{resume._id}}") Show
 
   if user
     form.pure-form.pure-form-aligned(ng-submit='newResume()')

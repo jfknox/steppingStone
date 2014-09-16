@@ -1,15 +1,33 @@
 var steppingStoneControllers = angular.module('steppingStoneControllers');
 
 
-steppingStoneControllers.controller('usersController', ['$scope', '$routeParams', 'userFactory',
-  function($scope, $routeParams, $userFactory) {
+steppingStoneControllers.controller('usersController', ['$scope', '$routeParams', '$cookies', 'commentFactory', 'resumeFactory',
+  function($scope, $routeParams, $cookies, $commentFactory, $resumeFactory) {
 	console.log('user list controller')
-	$userFactory.getAllUsers().
-	success(function (users) {
-		$scope.users = users
+	
+	$scope.userId = $cookies.userId;
 
-	}).
-	error(function() {
-		console.log("show error")
-	})
+
+	$resumeFactory.getAllResumes($scope.userId).
+		success(function (resumes) {
+			$scope.resumes = resumes
+
+		}).
+		error(function() {
+			console.log("show error")
+		})
+
+
+	$commentFactory.getAllComments($scope.userId, false).
+		success(function (comments) {
+			$scope.comments = comments
+
+		}).
+		error(function() {
+			console.log("comment show error")
+		})
+
+	
+
+		
   }]);

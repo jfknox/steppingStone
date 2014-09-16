@@ -10,6 +10,11 @@ var express          = require('express'),
     User             = require('./users/models'),
     mongoose         = require('mongoose');
 
+//Setup ip/port/domains for localhost or openshift
+var ip  = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var internal_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var external_port = process.env.OPENSHIFT_NODEJS_PORT ? '' : (':' + internal_port);
+var domain = process.env.OPENSHIFT_NODEJS_IP || process.env.OPENSHIFT_NODEJS_PORT ? "steppingstone-schoolofdevs.rhcloud.com" : "localhost";
 
 // Connect to remote mongo database hosted on monogolab.com
 //remember to put in mongo db lab account info
@@ -37,7 +42,7 @@ var LINKEDIN_SECRET_KEY = "S31fgUjalKvL7DCs";
 passport.use(new LinkedInStrategy({
     consumerKey: LINKEDIN_API_KEY,
     consumerSecret: LINKEDIN_SECRET_KEY,
-    callbackURL: "http://localhost:3000/auth/linkedin/callback"
+    callbackURL: "http://" + domain + external_port + "/auth/linkedin/callback"
   },
   function(token, tokenSecret, profile, done) {
     console.log('auth caller')
@@ -75,14 +80,15 @@ var layout = require('./layouts'),
     home = require('./home'),
     user = require('./users'),
     resumes = require('./resumes'),
-    comments= require('./comments'),
-    auth= require('./auth');
+    comments = require('./comments'),
+    auth = require('./auth');
+
 
 app.use(layout);
 app.use('/home', home);
 app.use('/resumes', resumes);
 app.use('/users', user);
 app.use('/auth', auth);
-//app.use('/comments', comments);
+app.use('/comments', comments);
 
-module.exports = http.createServer(app).listen(3000);
+module.exports = http.createServer(app).listen(internal_port, ip);

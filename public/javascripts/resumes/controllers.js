@@ -35,8 +35,8 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
 }]);
 
 
-steppingStoneControllers.controller('resumeShowController', ['$scope', '$routeParams', '$cookies', '$location', 'resumeFactory',
-	function($scope, $routeParams, $cookies, $location, $resumeFactory) {
+steppingStoneControllers.controller('resumeShowController', ['$scope', '$routeParams', '$cookies', '$location', 'resumeFactory', 'commentFactory', 
+	function($scope, $routeParams, $cookies, $location, $resumeFactory, $commentFactory) {
 		console.log('resume show controller')
 
 		$scope.userId = $cookies.userId;
@@ -74,7 +74,41 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 				})
 		}
 
+		$commentFactory.getAllComments($routeParams.id, true).
+			success(function (comments) {
+				$scope.comments = comments
 
+			}).
+			error(function() {
+				console.log("comment show error")
+			})
+
+		$scope.createComment = function() {
+			$commentFactory.createComment($scope.content, $scope.resume._id, $scope.anonymous).
+				success(function(newComment) {
+					console.log("left Comment");
+					$scope.comments.push(newComment);
+					$scope.content = ""
+					$scope.anonymous = false
+				}).
+				error(function() {
+					console.log("comment error")
+				});
+		}
+
+
+		$scope.deleteComment = function(commentId) {	
+		$commentFactory.deleteComment(commentId).
+			success(function (comment) {
+				$scope.comments = $scope.comments.filter(function(comment) {
+					return comment._id !== commentId;
+				});
+			}).
+			error(function() {
+				console.log("delete comment fail")
+			});
+	}
+		
 
 	}
 
