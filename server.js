@@ -10,8 +10,8 @@ var express          = require('express'),
     User             = require('./users/models'),
     mongoose         = require('mongoose');
 
-var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
-var domain = process.env.OPENSHIFT_NODEJS_PORT ? "steppingstone-schoolofdevs.rhcloud.com" : "localhost";
+var port = 8080;
+var domain = true ? "steppingstone-schoolofdevs.rhcloud.com" : "localhost";
 
 // Connect to remote mongo database hosted on monogolab.com
 //remember to put in mongo db lab account info
