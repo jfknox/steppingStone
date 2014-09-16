@@ -22,20 +22,20 @@ div(ng-controller='ResumeListController')
     .ng-modal(ng-show='show')
     .ng-modal-overlay(ng-click='hideModal()')
       .ng-modal-dialog(ng-style='dialogStyle')
-        form.pure-form.pure-form-aligned(ng-submit='newResume()')
-          fieldset
-          .pure-control-group
-            label(for='POST-industry') Industry:
-            input#POST-industry(type='text', ng-model='industry') 
-          .pure-control-group
-            label(for='POST-description') Description:
-            input#POST-description(type='text', ng-model='description')
-          .pure-control-group
-            label(for='POST-resumeText') resumeText:
-            input#POST-resumeText(type='text', ng-model='resumeText')
-          .pure-controls
-            button.pure-button.pure-button-primary(type='submit') Save Resume
         .ng-modal-close(ng-click='hideModal()') X
         .ng-modal-dialog-content(ng-transclude='ng-transclude')
+            form.pure-form.pure-form-aligned(ng-submit='newResume()')
+              fieldset
+              .pure-control-group
+                label(for='POST-industry') Industry:
+                input#POST-industry(type='text', ng-model='industry') 
+              .pure-control-group
+                label(for='POST-description') Description:
+                input#POST-description(type='text', ng-model='description')
+              .pure-control-group
+                label(for='POST-resumeText') resumeText:
+                input#POST-resumeText(type='text', ng-model='resumeText')
+              .pure-controls
+                button.pure-button.pure-button-primary(type='submit') Save Resume
 
    
