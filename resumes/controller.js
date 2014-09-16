@@ -2,14 +2,25 @@ var Resume = require('./models');
 
 exports.getAllResumes = function(req, res) {
 	//Get all resumes
-	Resume.find(function (err, resumes) {
-	  if (err) {
-	  	console.log(err);
-	  	res.status(500).end();
-	  } else {
-	  	res.send(resumes).end();
-	  }
-	});
+	if(req.query.userId) {
+		Resume.find({userId: req.query.userId}, function (err, resumes) {
+			if (err) {
+	     	    console.log(err);
+		  	    res.status(500).end();
+   		    } else {
+			  	res.send(resumes).end();
+			}
+		});
+	} else{
+		Resume.find(function (err, resumes) {
+			if (err) {
+	     	    console.log(err);
+		  	    res.status(500).end();
+   		    } else {
+			  	res.send(resumes).end();
+			}
+		});
+	}
 }
 
 exports.getResumeIndexTemplate = function(req, res) {

@@ -15,7 +15,7 @@ div(ng-controller='resumeShowController')
 		header
 			div(x-ng-repeat="comment in comments | filter:searchText")
 				.tile
-					h2 {{comment.content}}
+					p {{comment.content}}
 					p {{comment.userName}}  
 					p {{comment.date}}
 	if user

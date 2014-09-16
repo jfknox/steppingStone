@@ -1,0 +1,23 @@
+h1= title
+div(ng-controller='usersController')
+	if user
+		#main-container
+			#main.wrapper.clearfix
+				article
+					header
+						h1 Posted Resumes
+						div(x-ng-repeat="resume in resumes | filter:searchText")
+							.tile
+								p {{resume.industry}}
+								p {{resume.description}}
+								p {{resume.resumeText}}
+								p {{resume.date}}
+								a.pure-button(href="#/resumes/{{resume._id}}") Show
+
+						h1 Posted Comments
+						div(x-ng-repeat="comment in comments | filter:searchText")
+							.tile
+								p {{comment.content}}
+								p {{comment.date}}
+								a.pure-button(href="#/resumes/{{comment.resumeId}}") Show
+

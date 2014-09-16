@@ -9,13 +9,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 
-app.get('/index.html', controller.getUserIndex);
+app.get('/profile.html', controller.getProfile);
 
-app.route('/')
-.get(controller.getAllUsers)
-
-app.route('/:id')
-.get(controller.readUser)
 
 
 

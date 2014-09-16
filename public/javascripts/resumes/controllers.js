@@ -74,7 +74,7 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 				})
 		}
 
-		$commentFactory.getAllComments($routeParams.id).
+		$commentFactory.getAllComments($routeParams.id, true).
 			success(function (comments) {
 				$scope.comments = comments
 

@@ -1,7 +1,9 @@
 app.factory('resumeFactory', function($http) {
    return {
-        getAllResumes: function() {
-            return $http.get('/resumes/');
+        getAllResumes: function(userId) {
+            return $http.get('/resumes/', {
+            params: {userId: userId}
+            });
         },
         saveNewResume: function(industry, description, resumeText) {
             return $http.post('/resumes/', {
