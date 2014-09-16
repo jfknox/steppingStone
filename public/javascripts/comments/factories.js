@@ -20,5 +20,9 @@ app.factory('commentFactory', function($http) {
                 anonymous: anonymous
             });
         },
+
+        deleteComment: function(id) {
+            return $http.delete(/comments/ + id)
+        }
     }
 });

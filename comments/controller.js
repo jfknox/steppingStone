@@ -68,5 +68,27 @@ exports.createComment = function(req, res) {
 }
 
 
+exports.deleteComment = function (req,res) {
+	if (req.user) {
+		Comment.findOneAndRemove({
+			userId: req.user._id,
+			_id: req.params.id
+		}, function(err, comment) {
+			//if theres an error deleting, notify the comment
+			if(err) {
+				console.log(err);
+				res.status(500).end();
+			} else {
+				//Otherwise, send the deleted comment
+				res.send(comment).end();
+			}
+		});
+	}
+	else {
+		console.log("User not signed in");
+		res.status(500).end();
+	}
+}
+
 
 

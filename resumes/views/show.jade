@@ -18,6 +18,7 @@ div(ng-controller='resumeShowController')
 					p {{comment.content}}
 					p {{comment.userName}}  
 					p {{comment.date}}
+					a.pure-button(ng-show='userId === comment.userId', ng-click= "deleteComment(comment._id)") Delete
 	if user
 		form(ng-submit='createComment()')
 			label.pure-checkbox

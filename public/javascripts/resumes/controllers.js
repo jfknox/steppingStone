@@ -97,6 +97,19 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 		}
 
 
+		$scope.deleteComment = function(commentId) {	
+		$commentFactory.deleteComment(commentId).
+			success(function (comment) {
+				$scope.comments = $scope.comments.filter(function(comment) {
+					return comment._id !== commentId;
+				});
+			}).
+			error(function() {
+				console.log("delete comment fail")
+			});
+	}
+		
+
 	}
 
 

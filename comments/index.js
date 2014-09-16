@@ -13,3 +13,6 @@ app.route('/').
 get(controller.getComments).
 post(controller.createComment);
 
+
+app.route('/:id').
+delete(controller.deleteComment);
