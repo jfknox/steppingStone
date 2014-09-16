@@ -20,6 +20,9 @@ div(ng-controller='resumeShowController')
 					p {{comment.date}}
 	if user
 		form(ng-submit='createComment()')
+			label.pure-checkbox
+				input#private(type="checkbox", ng-model="anonymous")
+				| Post Anonymously?
 			.pure-u-1
 				textarea.pure-input-1(rows="6" cols="70")(ng-model='content' placeholder="Comment here!!")
 			.pure-controls

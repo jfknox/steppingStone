@@ -84,11 +84,12 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 			})
 
 		$scope.createComment = function() {
-			$commentFactory.createComment($scope.content, $scope.resume._id).
+			$commentFactory.createComment($scope.content, $scope.resume._id, $scope.anonymous).
 				success(function(newComment) {
 					console.log("left Comment");
 					$scope.comments.push(newComment);
 					$scope.content = ""
+					$scope.anonymous = false
 				}).
 				error(function() {
 					console.log("comment error")

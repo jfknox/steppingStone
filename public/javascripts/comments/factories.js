@@ -13,10 +13,11 @@ app.factory('commentFactory', function($http) {
             }
 
         },
-        createComment: function(content, resumeId) {
+        createComment: function(content, resumeId, anonymous) {
             return $http.post('/comments/', {
                 content: content,
-                resumeId: resumeId
+                resumeId: resumeId, 
+                anonymous: anonymous
             });
         },
     }

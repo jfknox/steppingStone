@@ -32,13 +32,16 @@ exports.getComments = function(req, res) {
 
 exports.createComment = function(req, res) {
 	if (req.user) {
-
 		var content = req.param('content');
 		var date = new Date();
 		var userId = req.user._id;
 		var userName = req.user.name;
-		var resumeId = req.param('resumeId')
+		var resumeId = req.param('resumeId');
+		var anonymous = req.param('anonymous')
 		//Create new resume by following the schema we created in the model
+		if (anonymous) {
+			userName = "Anonymous"
+		}
 		var newComment = new Comment({
 			content: content, 
 			resumeId: resumeId, 
