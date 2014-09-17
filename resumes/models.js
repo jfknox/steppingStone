@@ -7,7 +7,8 @@ var ResumeSchema   = new Schema({
 	resumeText: String,
 	date: Date,
 	userId: String, 
-	userName: String
+	userName: String, 
+	linkedInUrl: String
 
 });
 

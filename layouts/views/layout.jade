@@ -28,7 +28,7 @@ html(data-ng-app='steppingStone')
                     a(href='/auth/signout') Signout
             else
                 li
-                    a(href='/auth/linkedin') Signin
+                    a(href='/auth/linkedin') Sign in with Linkedin
 
 
    
@@ -38,14 +38,14 @@ html(data-ng-app='steppingStone')
       .view-frame(ng-view)
 
        
-    
-
+    script(src="http://platform.linkedin.com/in.js" type="text/javascript")
     script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.js" type='text/javascript')
     script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular-cookies.min.js" type='text/javascript')
     script(src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular-route.min.js" type='text/javascript')
     script(src='/javascripts/angularModal.js', type='text/javascript')
     script(src='/javascripts/app.js', type='text/javascript')
     script(src='/javascripts/home/controllers.js', type='text/javascript')
+    script(src='/javascripts/linkedin/factories.js', type='text/javascript')
     script(src='/javascripts/comments/factories.js' , type='text/javascript')
     script(src='/javascripts/users/controllers.js', type='text/javascript')
     script(src='/javascripts/resumes/controllers.js', type='text/javascript')

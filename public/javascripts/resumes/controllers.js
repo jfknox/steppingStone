@@ -20,7 +20,7 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
 			var industry = $scope.industry
 			var description = $scope.description
 			var resumeText = $scope.resumeText
-
+			console.log(industry)
 			$resumeFactory.saveNewResume(industry, description, resumeText).
 				success(function (newResume) {
 					console.log("new Success");
@@ -48,8 +48,8 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
 }]);
 
 
-steppingStoneControllers.controller('resumeShowController', ['$scope', '$routeParams', '$cookies', '$location', 'resumeFactory', 'commentFactory', 
-	function($scope, $routeParams, $cookies, $location, $resumeFactory, $commentFactory) {
+steppingStoneControllers.controller('resumeShowController', ['$scope', '$routeParams', '$cookies', '$location', 'resumeFactory', 'commentFactory', 'linkedinFactory',
+	function($scope, $routeParams, $cookies, $location, $resumeFactory, $commentFactory, $linkedinFactory) {
 		console.log('resume show controller')
 
 		$scope.userId = $cookies.userId;
@@ -61,9 +61,20 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 				$scope.industry = resume.industry
 				$scope.description = resume.description
 				$scope.resumeText = resume.resumeText
+				$linkedinFactory.refreshLinkedin()
+
 			}).
 			error(function() {
 				console.log("show error")
+			})
+
+		$commentFactory.getAllComments($routeParams.id, true).
+			success(function (comments) {
+				$scope.comments = comments;
+				$linkedinFactory.refreshLinkedin()
+			}).
+			error(function() {
+				console.log("comment show error")
 			})
 
 		$scope.editResume = function() {
@@ -88,15 +99,6 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 				})
 		}
 
-		$commentFactory.getAllComments($routeParams.id, true).
-			success(function (comments) {
-				$scope.comments = comments
-
-			}).
-			error(function() {
-				console.log("comment show error")
-			})
-
 		$scope.createComment = function() {
 			$commentFactory.createComment($scope.content, $scope.resume._id, $scope.anonymous).
 				success(function(newComment) {
@@ -104,6 +106,8 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 					$scope.comments.push(newComment);
 					$scope.content = ""
 					$scope.anonymous = false
+
+					$linkedinFactory.refreshLinkedin()
 				}).
 				error(function() {
 					console.log("comment error")
@@ -112,15 +116,15 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 
 
 		$scope.deleteComment = function(commentId) {	
-		$commentFactory.deleteComment(commentId).
-			success(function (comment) {
-				$scope.comments = $scope.comments.filter(function(comment) {
-					return comment._id !== commentId;
+			$commentFactory.deleteComment(commentId).
+				success(function (comment) {
+					$scope.comments = $scope.comments.filter(function(comment) {
+						return comment._id !== commentId;
+					});
+				}).
+				error(function() {
+					console.log("delete comment fail")
 				});
-			}).
-			error(function() {
-				console.log("delete comment fail")
-			});
 		}
 	
 

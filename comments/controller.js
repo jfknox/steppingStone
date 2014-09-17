@@ -36,18 +36,21 @@ exports.createComment = function(req, res) {
 		var date = new Date();
 		var userId = req.user._id;
 		var userName = req.user.name;
+		var linkedInUrl = req.user.linkedInUrl;
 		var resumeId = req.param('resumeId');
 		var anonymous = req.param('anonymous')
-		//Create new resume by following the schema we created in the model
 		if (anonymous) {
-			userName = "Anonymous"
+			userName = "Anonymous",
+			linkedInUrl = ''
 		}
+		//Create new resume by following the schema we created in the model
 		var newComment = new Comment({
 			content: content, 
 			resumeId: resumeId, 
 			date: date,
 			userId: userId, 
-			userName: userName
+			userName: userName,
+			linkedInUrl: linkedInUrl
 		});
 		//Now save the newly created resume
 		newComment.save(function(err) {

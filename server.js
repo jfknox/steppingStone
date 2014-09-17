@@ -47,13 +47,12 @@ passport.use(new LinkedInStrategy({
     scope: ['r_emailaddress', 'r_basicprofile']
 }, function(accessToken, refreshToken, profile, done) {
     console.log('auth caller')
-    console.log(profile)
     User.findOrCreate({ linkedinId: profile.id }, function (err, user) {
       if(err) {
         console.log(err)
       } else {
-        console.log(profile)
         user.name = profile.displayName
+        user.linkedInUrl = profile._json.publicProfileUrl
         user.save(function(err, user) {
           if(err) {
             console.log(err)

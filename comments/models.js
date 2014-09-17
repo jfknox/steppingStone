@@ -6,7 +6,8 @@ var CommentSchema   = new Schema({
 	date: Date,
 	userId: String, 
 	userName: String, 
-	resumeId: String
+	resumeId: String,
+	linkedInUrl: String
 
 });
 

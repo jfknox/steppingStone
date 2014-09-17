@@ -33,13 +33,14 @@ exports.getResumeShowTemplate = function (req, res) {
 
 exports.createResume = function (req,res) {
 	if (req.user) {
-
 		var description = req.param('description');
 		var industry = req.param('industry');
+		console.log(industry)
 		var resumeText = req.param('resumeText');
 		var date = new Date();
 		var userId = req.user._id;
 		var userName = req.user.name;
+		var linkedInUrl = req.user.linkedInUrl;
 		//Create new resume by following the schema we created in the model
 		var newResume = new Resume({
 			description: description, 
@@ -47,7 +48,8 @@ exports.createResume = function (req,res) {
 			resumeText: resumeText, 
 			date: date,
 			userId: userId, 
-			userName: userName
+			userName: userName,
+			linkedInUrl: linkedInUrl
 		});
 		//Now save the newly created resume
 		newResume.save(function(err) {

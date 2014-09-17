@@ -4,7 +4,8 @@ var Schema       = mongoose.Schema;
 
 var UserSchema   = new Schema({
 	name: String,
-	linkedinId: String
+	linkedinId: String,
+	linkedInUrl: String
 });
 
 UserSchema.plugin(findOrCreate);
