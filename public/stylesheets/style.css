@@ -128,6 +128,13 @@ background: rgb(202, 60, 60); /* this is a maroon */
   border-radius: 5px;
 }
 
+#logo{
+  height:35px;
+  width: auto;
+}
+.navItems{
+  margin-top: .6em;
+}
 
 
 

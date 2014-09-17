@@ -17,19 +17,20 @@ html(data-ng-app='steppingStone')
   body
     .header
     .home-menu.pure-menu.pure-menu-open.pure-menu-horizontal.pure-menu-fixed
-        a.pure-menu-heading(href='#/home') Stepping Stone
+        a.pure-menu-heading(href='#/home')
+            img#logo(src="/imgAssets/steppingStoneLogo4.png")
         ul
             if user
-                li
+                li.navItems
                     a(href='#/resumes') Resumes
-                li
+                li.navItems
                     a(href='#/profile') Profile
-                li
+                li.navItems
                     a(href='/auth/signout') Signout
             else
-                li
+                li.navItems
                     a(href='#/resumes') Resumes
-                li
+                li.navItems
                     a(href='/auth/linkedin') Sign in with Linkedin
 
 

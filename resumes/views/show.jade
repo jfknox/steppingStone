@@ -39,6 +39,7 @@ div(ng-controller='resumeShowController')
 			input#search(type='text', placeholder='Search in Comments', ng-model='searchText')
 	article
 		header
+			div#commentSpace
 			div(x-ng-repeat="comment in comments | filter:searchText")
 				.tile
 				div(ng-if='comment.linkedInUrl')
@@ -50,7 +51,9 @@ div(ng-controller='resumeShowController')
 					p {{comment.date}}
 				button.pure-button.button-error#commentdelete(ng-show='userId === comment.userId', ng-click= "deleteComment(comment._id)") Delete
 	div#comments
+
 		if user
+			div#commentSpace
 			form(ng-submit='createComment()')
 				.pure-u-1
 					textarea.pure-input-1(rows="6" cols="70" ng-model='content' placeholder="Comment here!!")
