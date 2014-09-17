@@ -79,6 +79,7 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 				success(function (editResume) {
 					console.log("edit Success");
 					$scope.resume = editResume;
+					$scope.modalShown = false
 				}).
 				error(function() {
 					console.log("edit error")

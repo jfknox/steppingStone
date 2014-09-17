@@ -1,25 +1,6 @@
 
 
 div(ng-controller='resumeShowController')   
-	if user
-		.modal(ng-show='userId === resume.userId')
-			modal-dialog(show='modalShown', width='45%', height='60%', dialog-title='Edit Resume' on-close='logClose()')
-				form.pure-form.pure-form-aligned(ng-submit='editResume()')
-					fieldset
-						.pure-control-group
-							label(for='POST-industry') Industry:
-							input#POST-industry(type='text', ng-model='industry') 
-						.pure-control-group
-							label(for='POST-description') Description:
-							input#POST-description(type='text', ng-model='description')
-						.pure-control-group
-							label(for='POST-resumeText') resumeText:
-							input#POST-resumeText(type='text', ng-model='resumeText')
-						.pure-controls
-							button#show-button.pure-button(type='submit') Update Resume
-							button.pure-button.button-error(ng-click= "deleteResume()") Delete
-			button(ng-click='toggleModal()') Resume Options	
-
 	div(ng-if='resume.linkedInUrl')
 		script(type="IN/MemberProfile" data-id="{{resume.linkedInUrl}}" data-format="inline" data-related="false")
 	script(type="IN/Share")
@@ -30,6 +11,24 @@ div(ng-controller='resumeShowController')
 	
 		.resumeText	{{resume.resumeText}}
 
+	if user
+		.modal(ng-show='userId === resume.userId')
+			modal-dialog(show='modalShown', width='45%', height='60%', dialog-title='Edit Resume' on-close='logClose()')
+				form.pure-form.pure-form-aligned(ng-submit='editResume()')
+					fieldset
+						.pure-control-group
+							label(for='POST-industry') Industry:
+							input#POST-industry(type='text', ng-model='$parent.industry') 
+						.pure-control-group
+							label(for='POST-description') Description:
+							input#POST-description(type='text', ng-model='$parent.description')
+						.pure-control-group
+							label(for='POST-resumeText') resumeText:
+							input#POST-resumeText(type='text', ng-model='$parent.resumeText')
+						.pure-controls
+							button#show-button.pure-button(type='submit') Update Resume
+							button.pure-button.button-error(ng-click= "deleteResume()") Delete
+			button.pure-button(ng-click='toggleModal()') Resume Options	
 	
 	div#viewWindow
 		

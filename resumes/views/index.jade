@@ -2,28 +2,26 @@ h1= title
 div(ng-controller='ResumeListController')
   #main-container
     #main.wrapper.clearfix
-      form(role='search')
-        .form-group
-          input#search(type='text', placeholder='Resume Search', ng-model='searchText')
-
       if user
         modal-dialog(show='modalShown', width='45%', height='60%', dialog-title='New Resume' on-close='logClose()')
           form.pure-form.pure-form-aligned(ng-submit='newResume()')
             fieldset
             .pure-control-group
               label(for='POST-industry') Industry:
-              input#POST-industry(type='text', ng-model='industry') 
+              input#POST-industry(type='text', ng-model='$parent.industry') 
             .pure-control-group
               label(for='POST-description') Description:
-              input#POST-description(type='text', ng-model='description')
+              input#POST-description(type='text', ng-model='$parent.description')
             .pure-control-group
               label(for='POST-resumeText') resumeText:
-              input#POST-resumeText(type='text', ng-model='resumeText')
+              input#POST-resumeText(type='text', ng-model='$parent.resumeText')
             .pure-controls
               button.pure-button.pure-button-primary(type='submit') Save Resume
-        button(ng-click='toggleModal()') Upload Resume
+        button.pure-button(ng-click='toggleModal()') Upload Resume
 
-
+      form(role='search')
+        .form-group
+          input#search(type='text', placeholder='Resume Search', ng-model='searchText')
 
       article
         header
