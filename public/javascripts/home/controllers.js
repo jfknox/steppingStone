@@ -1,4 +1,4 @@
-var steppingStoneControllers = angular.module('steppingStoneControllers', ['ngCookies']);
+var steppingStoneControllers = angular.module('steppingStoneControllers', ['ngCookies','ngModal']);
 
 steppingStoneControllers.controller('HomeController', ['$scope', '$routeParams',
   function($scope, $routeParams) {

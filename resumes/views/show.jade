@@ -1,6 +1,25 @@
 
 
 div(ng-controller='resumeShowController')   
+	if user
+		.modal(ng-show='userId === resume.userId')
+					modal-dialog(show='modalShown', width='45%', height='60%', dialog-title='Edit Resume' on-close='logClose()')
+						form.pure-form.pure-form-aligned(ng-submit='editResume()')
+							fieldset
+								.pure-control-group
+									label(for='POST-industry') Industry:
+									input#POST-industry(type='text', ng-model='industry') 
+								.pure-control-group
+									label(for='POST-description') Description:
+									input#POST-description(type='text', ng-model='description')
+								.pure-control-group
+									label(for='POST-resumeText') resumeText:
+									input#POST-resumeText(type='text', ng-model='resumeText')
+								.pure-controls
+									button#show-button.pure-button(type='submit') Update Resume
+									button.pure-button.button-error(ng-click= "deleteResume()") Delete
+					button(ng-click='toggleModal()') Resume Options	
+
 	h2.name {{resume.userName}}
 	hr
 	h3.industry {{resume.industry}}
@@ -24,31 +43,17 @@ div(ng-controller='resumeShowController')
 				div#commentTile
 					p {{comment.content}}
 					p {{comment.date}}
-					a#show-button.pure-button(ng-show='userId === comment.userId', ng-click= "deleteComment(comment._id)") Delete
-div#comments
-	if user
-		form(ng-submit='createComment()')
-			label.pure-checkbox
-				input#private(type="checkbox", ng-model="anonymous")
-				| Post Anonymously?
-			.pure-u-1
-				textarea.pure-input-1(rows="6" cols="70")(ng-model='content' placeholder="Comment here!!")
-				
-			div#commentSpace.pure-controls
-				button#show-button.pure-button(type='submit') Leave Comment
-		
-		.modal(ng-show='userId === resume.userId')
-			form.pure-form.pure-form-aligned(ng-submit='editResume()')
-				fieldset
-					.pure-control-group
-						label(for='POST-industry') Industry:
-						input#POST-industry(type='text', ng-model='industry') 
-					.pure-control-group
-						label(for='POST-description') Description:
-						input#POST-description(type='text', ng-model='description')
-					.pure-control-group
-						label(for='POST-resumeText') resumeText:
-						input#POST-resumeText(type='text', ng-model='resumeText')
-					.pure-controls
-						button#show-button.pure-button(type='submit') Update Resume
-						button.pure-button.button-error(ng-click= "deleteResume()") Delete
+				button.pure-button.button-error#commentdelete(ng-show='userId === comment.userId', ng-click= "deleteComment(comment._id)") Delete
+	div#comments
+		if user
+			form(ng-submit='createComment()')
+				.pure-u-1
+					textarea.pure-input-1(rows="6" cols="70")(ng-model='content' placeholder="Comment here!!")
+				label.pure-checkbox
+					input#private(type="checkbox", ng-model="anonymous")
+					| Post Anonymously?	
+				div#commentSpace.pure-controls
+					button#show-button.pure-button(type='submit') Leave Comment
+
+			
+			

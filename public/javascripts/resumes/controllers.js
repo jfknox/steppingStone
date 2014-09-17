@@ -4,6 +4,7 @@ var steppingStoneControllers = angular.module('steppingStoneControllers');
 steppingStoneControllers.controller('ResumeListController', ['$scope', '$routeParams', 'resumeFactory',
   	function($scope, $routeParams, $resumeFactory) {
 		console.log('resume list controller')
+		$scope.modalShown = false
 
 		$resumeFactory.getAllResumes().
 			success(function (resumes) {
@@ -27,6 +28,7 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
 					$scope.industry = ''
 					$scope.description = ''
 					$scope.resumeText = ''
+					$scope.modalShown = false
 				}).
 				error(function() {
 					console.log("new error")
@@ -51,6 +53,7 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 		console.log('resume show controller')
 
 		$scope.userId = $cookies.userId;
+		$scope.modalShown = false
 
 		$resumeFactory.getResume($routeParams.id).
 			success(function (resume) {
@@ -118,8 +121,18 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 			error(function() {
 				console.log("delete comment fail")
 			});
-	}
-		
+		}
+	
+
+		$scope.logClose = function() {
+        	console.log('close!');
+        };
+        $scope.toggleModal = function() {
+        	console.log("toggle")
+        	$scope.modalShown = !$scope.modalShown;
+        };
+	     
+
 
 	}
 

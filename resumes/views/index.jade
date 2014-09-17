@@ -7,7 +7,7 @@ div(ng-controller='ResumeListController')
           input#search(type='text', placeholder='Resume Search', ng-model='searchText')
 
       if user
-        modal-dialog(show='modalShown', width='750px', height='60%')
+        modal-dialog(show='modalShown', width='45%', height='60%', dialog-title='New Resume' on-close='logClose()')
           form.pure-form.pure-form-aligned(ng-submit='newResume()')
             fieldset
             .pure-control-group
@@ -21,7 +21,7 @@ div(ng-controller='ResumeListController')
               input#POST-resumeText(type='text', ng-model='resumeText')
             .pure-controls
               button.pure-button.pure-button-primary(type='submit') Save Resume
-        button(ng-click='toggleModal()') Open Modal Dialog
+        button(ng-click='toggleModal()') Upload Resume
 
 
 
@@ -34,24 +34,4 @@ div(ng-controller='ResumeListController')
               p {{resume.resumeText}} 
               p {{resume.date}}
               a#show-button.pure-button(href="#/resumes/{{resume._id}}") Show
-  //- if user
-  //-   .ng-modal(ng-show='show')
-  //-   .ng-modal-overlay(ng-click='hideModal()')
-  //-     .ng-modal-dialog(ng-style='dialogStyle')
-  //-       .ng-modal-close(ng-click='hideModal()') X
-  //-       .ng-modal-dialog-content(ng-transclude='ng-transclude')
-  //-           form.pure-form.pure-form-aligned(ng-submit='newResume()')
-  //-             fieldset
-  //-             .pure-control-group
-  //-               label(for='POST-industry') Industry:
-  //-               input#POST-industry(type='text', ng-model='industry') 
-  //-             .pure-control-group
-  //-               label(for='POST-description') Description:
-  //-               input#POST-description(type='text', ng-model='description')
-  //-             .pure-control-group
-  //-               label(for='POST-resumeText') resumeText:
-  //-               input#POST-resumeText(type='text', ng-model='resumeText')
-  //-             .pure-controls
-  //-               button#show-button.pure-button(type='submit') Save Resume
 
-   
