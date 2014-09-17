@@ -134,13 +134,7 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
         	$scope.modalShown = !$scope.modalShown;
         };
 	     
-
-
 	}
-
-
-
-
 
 ]);
 
