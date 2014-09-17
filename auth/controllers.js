@@ -1,3 +1,4 @@
+
 exports.linkedInCallback = function(req, res) {
   //on successful login, redirect to homepage
   res.redirect('/#/resumes');

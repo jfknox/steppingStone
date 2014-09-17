@@ -32,6 +32,17 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
 					console.log("new error")
 				})		
 		}
+	
+     
+        $scope.logClose = function() {
+        	console.log('close!');
+        };
+        $scope.toggleModal = function() {
+        	console.log("toggle")
+        	$scope.modalShown = !$scope.modalShown;
+        };
+	     
+
 }]);
 
 
