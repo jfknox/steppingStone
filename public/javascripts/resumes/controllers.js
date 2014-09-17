@@ -1,14 +1,15 @@
 var steppingStoneControllers = angular.module('steppingStoneControllers');
 
 
-steppingStoneControllers.controller('ResumeListController', ['$scope', '$routeParams', 'resumeFactory',
-  	function($scope, $routeParams, $resumeFactory) {
+steppingStoneControllers.controller('ResumeListController', ['$scope', '$routeParams', '$location', 'resumeFactory', 'linkedinFactory',
+  	function($scope, $routeParams, $location, $resumeFactory, $linkedinFactory) {
 		console.log('resume list controller')
 		$scope.modalShown = false
 
 		$resumeFactory.getAllResumes().
 			success(function (resumes) {
 				$scope.resumes = resumes
+				$linkedinFactory.refreshLinkedin()
 
 			}).
 			error(function() {
@@ -24,11 +25,7 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
 			$resumeFactory.saveNewResume(industry, description, resumeText).
 				success(function (newResume) {
 					console.log("new Success");
-					$scope.resumes.push(newResume);
-					$scope.industry = ''
-					$scope.description = ''
-					$scope.resumeText = ''
-					$scope.modalShown = false
+					$location.path('/resumes/' + newResume._id);
 				}).
 				error(function() {
 					console.log("new error")
