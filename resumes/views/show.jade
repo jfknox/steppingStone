@@ -22,6 +22,7 @@ div(ng-controller='resumeShowController')
 
 	div(ng-if='resume.linkedInUrl')
 		script(type="IN/MemberProfile" data-id="{{resume.linkedInUrl}}" data-format="inline" data-related="false")
+	script(type="IN/Share")
 	hr
 	h3.industry {{resume.industry}}
 	div#commentTile
