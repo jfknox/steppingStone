@@ -75,6 +75,7 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 			})
 
 		$scope.editResume = function() {
+			console.log('edit resume')
 			$resumeFactory.updateResume($scope.resume._id, $scope.industry, $scope.description, $scope.resumeText).
 				success(function (editResume) {
 					console.log("edit Success");
@@ -87,9 +88,10 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 		}
 
 		$scope.deleteResume = function() {
+			console.log('delete resume')
 			$resumeFactory.deleteResume($scope.resume._id).
 				success(function() {
-					console.log("edit Success");
+					console.log("delete Success");
 					$location.path('/resumes');
 				}).
 				error(function() {

@@ -1,4 +1,5 @@
 var Resume = require('./models');
+var Comment = require('./../comments/models')
 
 exports.getAllResumes = function(req, res) {
 	//Get all resumes
@@ -112,17 +113,27 @@ exports.updateResume = function (req,res) {
 
 exports.deleteResume = function (req,res) {
 	if (req.user) {
+		console.log('delete resume enter')
 		Resume.findOneAndRemove({
 			userId: req.user._id,
 			_id: req.params.id
 		}, function(err, resume) {
+			console.log('delete resume callback')
 			//if theres an error deleting, notify the resume
 			if(err) {
 				console.log(err);
 				res.status(500).end();
 			} else {
 				//Otherwise, send the deleted resume
-				res.send(resume).end();
+				Comment.remove({ resumeId: req.params.id}, function (err) {
+					console.log('delete comments callback')
+					if(err) {
+						console.log(err);
+						res.status(500).end();
+					} else {
+						res.send(resume).end();
+					}
+				});
 			}
 		});
 	}

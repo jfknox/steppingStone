@@ -27,7 +27,8 @@ div(ng-controller='resumeShowController')
 							input#POST-resumeText(type='text', ng-model='$parent.resumeText')
 						.pure-controls
 							button#show-button.pure-button(type='submit') Update Resume
-							button.pure-button.button-error(ng-click= "deleteResume()") Delete
+				.pure-controls
+					button.pure-button.button-error(ng-click= "deleteResume()") Delete
 			button.pure-button(ng-click='toggleModal()') Resume Options	
 	
 	div#viewWindow
