@@ -19,7 +19,7 @@ div(ng-controller='ResumeListController')
               button.pure-button.pure-button-primary(type='submit') Save Resume
         button.pure-button(ng-click='toggleModal()') Upload Resume
 
-      form(role='search')
+      form(role='search' ng-show="resumes")
         .form-group
           input#search(type='text', placeholder='Resume Search', ng-model='searchText')
 

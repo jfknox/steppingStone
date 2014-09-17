@@ -5,7 +5,7 @@ div(ng-controller='usersController')
 			#main.wrapper.clearfix
 				article
 					header
-						form(role='search')
+						form(role='search' ng-show="resumes || comments")
 							.form-group
 								input#search(type='text', placeholder='Resume Search', ng-model='searchText')
 						h1 Posted Resumes

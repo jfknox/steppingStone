@@ -33,11 +33,11 @@ div(ng-controller='resumeShowController')
 	
 	div#viewWindow
 		
-	form(role='search')
+	form(role='search', ng-show="comments")
 		div#commentSpace
 		.form-group
 			input#search(type='text', placeholder='Search in Comments', ng-model='searchText')
-		article
+	article
 		header
 			div(x-ng-repeat="comment in comments | filter:searchText")
 				.tile
