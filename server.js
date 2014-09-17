@@ -6,7 +6,7 @@ var express          = require('express'),
     bodyParser       = require('body-parser'),
     passport         = require('passport'),
     cookieParser     = require('cookie-parser'),
-    LinkedInStrategy = require('passport-linkedin').Strategy,
+    LinkedInStrategy = require('passport-linkedin-oauth2').Strategy
     User             = require('./users/models'),
     mongoose         = require('mongoose');
 
@@ -41,12 +41,13 @@ var LINKEDIN_API_KEY = "75qkg18qrbqlkq";
 var LINKEDIN_SECRET_KEY = "S31fgUjalKvL7DCs";
 
 passport.use(new LinkedInStrategy({
-    consumerKey: LINKEDIN_API_KEY,
-    consumerSecret: LINKEDIN_SECRET_KEY,
-    callbackURL: "http://" + domain + external_port + "/auth/linkedin/callback"
-  },
-  function(token, tokenSecret, profile, done) {
+    clientID: LINKEDIN_API_KEY,
+    clientSecret: LINKEDIN_SECRET_KEY,
+    callbackURL: "http://" + domain + external_port + "/auth/linkedin/callback",
+    scope: ['r_emailaddress', 'r_basicprofile']
+}, function(accessToken, refreshToken, profile, done) {
     console.log('auth caller')
+    console.log(profile)
     User.findOrCreate({ linkedinId: profile.id }, function (err, user) {
       if(err) {
         console.log(err)
