@@ -12,7 +12,7 @@ var express          = require('express'),
 
 //Setup ip/port/domains for localhost or openshift
 var ip  = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-var internal_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var internal_port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var external_port = process.env.OPENSHIFT_NODEJS_PORT ? '' : (':' + internal_port);
 var domain = process.env.OPENSHIFT_NODEJS_IP || process.env.OPENSHIFT_NODEJS_PORT ? "steppingstone-schoolofdevs.rhcloud.com" : "localhost";
 

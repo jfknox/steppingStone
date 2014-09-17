@@ -1,24 +1,31 @@
-h1= title
+
+
 div(ng-controller='resumeShowController')   
-	.industry {{resume.industry}}
+	h2.name {{resume.userName}}
+	hr
+	h3.industry {{resume.industry}}
+	div#commentTile
+		.description {{resume.description}}
+	
+		.resumeText	{{resume.resumeText}}
 
-	.description {{resume.description}}
-
-	.resumeText	{{resume.resumeText}}
-
-	.name {{resume.userName}}
-
+	
+	div#viewWindow
+		
 	form(role='search')
+		div#commentSpace
 		.form-group
 			input#search(type='text', placeholder='Search in Comments', ng-model='searchText')
 		article
 		header
 			div(x-ng-repeat="comment in comments | filter:searchText")
 				.tile
+					p {{comment.userName}}
+				div#commentTile
 					p {{comment.content}}
-					p {{comment.userName}}  
 					p {{comment.date}}
-					a.pure-button(ng-show='userId === comment.userId', ng-click= "deleteComment(comment._id)") Delete
+					a#show-button.pure-button(ng-show='userId === comment.userId', ng-click= "deleteComment(comment._id)") Delete
+div#comments
 	if user
 		form(ng-submit='createComment()')
 			label.pure-checkbox
@@ -26,8 +33,10 @@ div(ng-controller='resumeShowController')
 				| Post Anonymously?
 			.pure-u-1
 				textarea.pure-input-1(rows="6" cols="70")(ng-model='content' placeholder="Comment here!!")
-			.pure-controls
-				button.pure-button(type='submit') Leave Comment
+				
+			div#commentSpace.pure-controls
+				button#show-button.pure-button(type='submit') Leave Comment
+		
 		.modal(ng-show='userId === resume.userId')
 			form.pure-form.pure-form-aligned(ng-submit='editResume()')
 				fieldset
@@ -41,5 +50,5 @@ div(ng-controller='resumeShowController')
 						label(for='POST-resumeText') resumeText:
 						input#POST-resumeText(type='text', ng-model='resumeText')
 					.pure-controls
-						button.pure-button(type='submit') Update Resume
-						button.pure-button(ng-click= "deleteResume()") Delete
+						button#show-button.pure-button(type='submit') Update Resume
+						button.pure-button.button-error(ng-click= "deleteResume()") Delete
