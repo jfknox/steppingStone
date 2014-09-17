@@ -1,27 +1,34 @@
-h1= title
+
 div(ng-controller='usersController')
+	script(type="IN/MemberProfile" data-id="{{resume.linkedInUrl}}" data-format="inline" data-related="false")
 	if user
 		#main-container
 			#main.wrapper.clearfix
 				article
-					header
-						form(role='search' ng-show="resumes || comments")
-							.form-group
-								input#search(type='text', placeholder='Resume Search', ng-model='searchText')
-						h1 Posted Resumes
-						div(x-ng-repeat="resume in resumes | filter:searchText")
-							.tile
-								p {{resume.industry}}
-								p {{resume.description}}
-								p {{resume.resumeText}}
-								p {{resume.date}}
-								a.pure-button(href="#/resumes/{{resume._id}}") Show
+						header
+							.columns
+								.pin
+									h1= title
+									form(role='search' ng-show="resumes || comments")
+										.form-group
+											input#search(type='text', placeholder='Search through your profile', ng-model='searchText')
+							.columns
+								.pin
+									h1 Posted Resumes
+									div(x-ng-repeat="resume in resumes | filter:searchText")
+										.tile
+											p {{resume.industry}}
+											p {{resume.description}}
+											p {{resume.resumeText}}
+											p {{resume.date}}
+											a.pure-button(href="#/resumes/{{resume._id}}") Show
+							.columns
+								.pin
+									h1 Posted Comments
+									div(x-ng-repeat="comment in comments | filter:searchText")
+										.tile
+											p {{comment.content}}
+											p {{comment.date}}
+											a.pure-button(href="#/resumes/{{comment.resumeId}}") Show
 
-						h1 Posted Comments
-						div(x-ng-repeat="comment in comments | filter:searchText")
-							.tile
-								p {{comment.content}}
-								p {{comment.date}}
-								a.pure-button(href="#/resumes/{{comment.resumeId}}") Show
-								
 
