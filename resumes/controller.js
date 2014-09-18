@@ -67,7 +67,7 @@ exports.createResume = function (req,res) {
 			    req.pipe(req.busboy);
 			    req.busboy.on('file', function (fieldname, file, filename) {
 					var rootPath = process.env.OPENSHIFT_DATA_DIR || (__dirname + '/../files/');
-					var path =  'resumes/' + newResume._id + '_' + filename;
+					var path = newResume._id + '_' + filename;
 
 			        console.log("Uploading: " + filename);
 			        console.log("Save to: " + path);
