@@ -20,8 +20,8 @@ div(ng-controller='resumeShowController')
 						.pure-control-group
 							label(for='POST-description') Description:
 							input#POST-description(type='text', ng-model='$parent.description')
-        				.pure-control-group
-                			input(type="file", name="file", id="file", onchange="angular.element(this).scope().uploadFile(this.files)")
+						.pure-control-group
+							input(type="file", name="file", id="file", onchange="angular.element(this).scope().uploadFile(this.files)")
 						.pure-controls
 							button#show-button.pure-button(type='submit') Update Resume
 				.pure-controls
