@@ -15,5 +15,8 @@ app.set('view engine', 'jade');
 app.get('/profile.html', controller.getProfile);
 
 
+app.route('/:id').
+get(controller.getUser);
+
 
 

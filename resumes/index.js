@@ -1,11 +1,15 @@
 //require express routing, and path
 //require path module contains several helper functions to help make path manipulation easier
 var express = require('express'),
+    busboy           = require('connect-busboy'),
     path         = require('path');
 module.exports = app = express();
 
+app.use(busboy());
+
 //require the user controller to access the functions
 var controller = require('./controller');
+
 
 
 // view engine setup

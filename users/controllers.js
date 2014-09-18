@@ -6,4 +6,15 @@ exports.getProfile = function(req, res) {
 	res.render('profile', { title: 'User Profile', user: req.user });
 }
 
-	
+exports.getUser = function(req, res) {
+	User.findById(req.params.id, function(err, user) {
+		if (err) {
+			console.log(err);
+			res.status(500).end();
+		} else {
+			res.send(user).end();
+		}
+
+	});
+}
+

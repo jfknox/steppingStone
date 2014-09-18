@@ -17,12 +17,13 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
 			})
 	
 
+		var file;
+		$scope.uploadFile = function(files) {
+		    file = files[0];
+		};
+
 		$scope.newResume = function() {
-			var industry = $scope.industry
-			var description = $scope.description
-			var resumeText = $scope.resumeText
-			console.log(industry)
-			$resumeFactory.saveNewResume(industry, description, resumeText).
+			$resumeFactory.saveNewResume($scope.industry, $scope.description, file).
 				success(function (newResume) {
 					console.log("new Success");
 					$location.path('/resumes/' + newResume._id);
@@ -31,7 +32,6 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
 					console.log("new error")
 				})		
 		}
-	
      
         $scope.logClose = function() {
         	console.log('close!');
@@ -74,9 +74,14 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 				console.log("comment show error")
 			})
 
+		var file;
+		$scope.uploadFile = function(files) {
+		    file = files[0];
+		};
+
 		$scope.editResume = function() {
 			console.log('edit resume')
-			$resumeFactory.updateResume($scope.resume._id, $scope.industry, $scope.description, $scope.resumeText).
+			$resumeFactory.updateResume($scope.resume._id, $scope.industry, $scope.description, file).
 				success(function (editResume) {
 					console.log("edit Success");
 					$scope.resume = editResume;

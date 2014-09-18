@@ -4,7 +4,7 @@ div(ng-controller='ResumeListController')
     #main.wrapper.clearfix
       if user
         modal-dialog(show='modalShown', width='45%', height='60%', dialog-title='New Resume' on-close='logClose()')
-          form.pure-form.pure-form-aligned(ng-submit='newResume()')
+          form.pure-form.pure-form-aligned(ng-submit='newResume()', enctype="multipart/form-data")
             fieldset
             .pure-control-group
               label(for='POST-industry') Industry:
@@ -13,8 +13,7 @@ div(ng-controller='ResumeListController')
               label(for='POST-description') Description:
               input#POST-description(type='text', ng-model='$parent.description')
             .pure-control-group
-              label(for='POST-resumeText') resumeText:
-              input#POST-resumeText(type='text', ng-model='$parent.resumeText')
+                input(type="file", name="file", id="file", onchange="angular.element(this).scope().uploadFile(this.files)")
             .pure-controls
               button.pure-button.pure-button-primary(type='submit') Save Resume
         button.pure-button(ng-click='toggleModal()') Upload Resume

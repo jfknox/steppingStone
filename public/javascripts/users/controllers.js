@@ -1,8 +1,8 @@
 var steppingStoneControllers = angular.module('steppingStoneControllers');
 
 
-steppingStoneControllers.controller('usersController', ['$scope', '$routeParams', '$cookies', 'commentFactory', 'resumeFactory',
-  function($scope, $routeParams, $cookies, $commentFactory, $resumeFactory) {
+steppingStoneControllers.controller('usersController', ['$scope', '$routeParams', '$cookies', 'commentFactory', 'resumeFactory', 'userFactory', 'linkedinFactory', 
+  function($scope, $routeParams, $cookies, $commentFactory, $resumeFactory, $userFactory, $linkedinFactory) {
 	console.log('user list controller')
 	
 	$scope.userId = $cookies.userId;
@@ -27,7 +27,15 @@ steppingStoneControllers.controller('usersController', ['$scope', '$routeParams'
 			console.log("comment show error")
 		})
 
-	
+	$userFactory.getUser($scope.userId).
+		success(function (users) {
+			$scope.linkedInUrl = users.linkedInUrl
+			$linkedinFactory.refreshLinkedin()
+			console.log(users.linkedInUrl)
+		}).
+		error(function() {
+			console.log("show error")
+		})
 
 		
   }]);

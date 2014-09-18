@@ -8,8 +8,6 @@ div(ng-controller='resumeShowController')
 	h3.industry {{resume.industry}}
 	div#commentTile
 		.description {{resume.description}}
-	
-		.resumeText	{{resume.resumeText}}
 
 	if user
 		.modal(ng-show='userId === resume.userId')
@@ -22,9 +20,8 @@ div(ng-controller='resumeShowController')
 						.pure-control-group
 							label(for='POST-description') Description:
 							input#POST-description(type='text', ng-model='$parent.description')
-						.pure-control-group
-							label(for='POST-resumeText') resumeText:
-							input#POST-resumeText(type='text', ng-model='$parent.resumeText')
+        				.pure-control-group
+                			input(type="file", name="file", id="file", onchange="angular.element(this).scope().uploadFile(this.files)")
 						.pure-controls
 							button#show-button.pure-button(type='submit') Update Resume
 				.pure-controls
@@ -32,6 +29,8 @@ div(ng-controller='resumeShowController')
 			button.pure-button(ng-click='toggleModal()') Resume Options	
 	
 	div#viewWindow
+		object(data='{{resume.resumeText}}', type='application/pdf')
+	a.pure-button(href='{{resume.resumeText}}') Download pdf
 		
 	form(role='search', ng-show="comments")
 		div#commentSpace

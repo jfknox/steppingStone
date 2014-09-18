@@ -1,6 +1,7 @@
 //require both the resume and comment models
 var Resume = require('./models');
-var Comment = require('./../comments/models')
+var Comment = require('./../comments/models');
+var fs      = require('fs');
 
 //export get all resume function
 exports.getAllResumes = function(req, res) {
@@ -42,8 +43,6 @@ exports.createResume = function (req,res) {
 	if (req.user) {
 		var description = req.param('description');
 		var industry = req.param('industry');
-		console.log(industry)
-		var resumeText = req.param('resumeText');
 		var date = new Date();
 		var userId = req.user._id;
 		var userName = req.user.name;
@@ -51,8 +50,7 @@ exports.createResume = function (req,res) {
 		//Create new resume by following the schema we created in the model
 		var newResume = new Resume({
 			description: description, 
-			industry: industry, 
-			resumeText: resumeText, 
+			industry: industry,
 			date: date,
 			userId: userId, 
 			userName: userName,
@@ -65,8 +63,28 @@ exports.createResume = function (req,res) {
 				console.log(err);
 				res.status(500).end();
 			} else {
-				//Otherwise, redirect to the new resume's show page
-				res.send(newResume).end();
+				var fstream;
+			    req.pipe(req.busboy);
+			    req.busboy.on('file', function (fieldname, file, filename) {
+					var rootPath = process.env.OPENSHIFT_DATA_DIR || (__dirname + '/../files/');
+					var path =  'resumes/' + newResume._id + '_' + filename;
+
+			        console.log("Uploading: " + filename);
+			        console.log("Save to: " + path);
+			        fstream = fs.createWriteStream(rootPath + path);
+			        file.pipe(fstream);
+			        fstream.on('close', function () {
+			        	newResume.resumeText = 'files/' + path;
+			        	newResume.save(function(err) {
+			        		if(err) {
+			        			console.log(err)
+			        			res.status(500).end();
+			        		} else {
+								res.send(newResume).end();
+			        		}
+			        	})
+			        });
+			    });
 			}
 		});
 	}

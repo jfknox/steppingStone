@@ -25,8 +25,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/files', express.static(process.env.OPENSHIFT_DATA_DIR || path.join(__dirname, 'files')));
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 //passport requirements to access user
 passport.serializeUser(function(user, done) {

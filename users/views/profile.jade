@@ -3,6 +3,8 @@ div(ng-controller='usersController')
 	if user
 		#main-container
 			#main.wrapper.clearfix
+				div(ng-if='linkedInUrl')
+					script(type="IN/MemberProfile" data-id="{{linkedInUrl}}" data-format="inline" data-related="false")
 				article
 					header
 						form(role='search' ng-show="resumes || comments")
