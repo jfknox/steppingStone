@@ -40,6 +40,7 @@ passport.deserializeUser(function(obj, done) {
 var LINKEDIN_API_KEY = "75qkg18qrbqlkq";
 var LINKEDIN_SECRET_KEY = "S31fgUjalKvL7DCs";
 
+//linked in passport verification
 passport.use(new LinkedInStrategy({
     clientID: LINKEDIN_API_KEY,
     clientSecret: LINKEDIN_SECRET_KEY,
@@ -47,6 +48,7 @@ passport.use(new LinkedInStrategy({
     scope: ['r_emailaddress', 'r_basicprofile']
 }, function(accessToken, refreshToken, profile, done) {
     console.log('auth caller')
+    //find user after login andon success pull out the name and the linked in url 
     User.findOrCreate({ linkedinId: profile.id }, function (err, user) {
       if(err) {
         console.log(err)
@@ -76,7 +78,7 @@ app.use(function(req, res, next) {
   //Continue on
   next();
 });
-
+//require the files for the routes.
 var layout = require('./layouts'),
     home = require('./home'),
     user = require('./users'),
@@ -84,7 +86,7 @@ var layout = require('./layouts'),
     comments = require('./comments'),
     auth = require('./auth');
 
-
+// configure the middleware used by the routes of the Express HTTP server object.
 app.use(layout);
 app.use('/home', home);
 app.use('/resumes', resumes);

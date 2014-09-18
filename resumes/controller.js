@@ -1,18 +1,24 @@
+//require both the resume and comment models
 var Resume = require('./models');
 var Comment = require('./../comments/models')
 
+//export get all resume function
 exports.getAllResumes = function(req, res) {
-	//Get all resumes
+	//if pass a user id then get all resumes for that id 
 	if(req.query.userId) {
+		//find all ids with the specified user id
 		Resume.find({userId: req.query.userId}, function (err, resumes) {
+			//an error happens then log error
 			if (err) {
 	     	    console.log(err);
 		  	    res.status(500).end();
+		  	//respond by sending all of the resumes
    		    } else {
 			  	res.send(resumes).end();
 			}
 		});
 	} else{
+		//
 		Resume.find(function (err, resumes) {
 			if (err) {
 	     	    console.log(err);
