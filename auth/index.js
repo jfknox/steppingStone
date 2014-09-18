@@ -1,3 +1,6 @@
+//require express routing, and path
+//require passport to help with linkedin login and authentication
+//require controller directory
 var express = require('express');
 module.exports = app = express();
 var passport = require('passport');
@@ -10,7 +13,7 @@ app.get('/linkedin', passport.authenticate('linkedin', { state: 'SOME STATE'  })
     // function will not be called.
   });
 
-
+//the redirect after linkedin login is complete
 app.get('/linkedin/callback', passport.authenticate('linkedin', {
    successRedirect: '/#/resumes',
    failureRedirect: '/'
