@@ -40,17 +40,14 @@ exports.getResumeShowTemplate = function (req, res) {
 }
 
 exports.createResume = function (req,res) {
+	// save entry first to gain access to the resumeId for unique uploads
 	if (req.user) {
-		var description = req.param('description');
-		var industry = req.param('industry');
 		var date = new Date();
 		var userId = req.user._id;
 		var userName = req.user.name;
 		var linkedInUrl = req.user.linkedInUrl;
 		//Create new resume by following the schema we created in the model
 		var newResume = new Resume({
-			description: description, 
-			industry: industry,
 			date: date,
 			userId: userId, 
 			userName: userName,
@@ -63,28 +60,38 @@ exports.createResume = function (req,res) {
 				console.log(err);
 				res.status(500).end();
 			} else {
+				//Save the file to storage
 				var fstream;
 			    req.pipe(req.busboy);
 			    req.busboy.on('file', function (fieldname, file, filename) {
+			    	//if we are on localhost use dirname, if on openshift use OPENSHIFT for path
 					var rootPath = process.env.OPENSHIFT_DATA_DIR || (__dirname + '/../files/');
 					var path = newResume._id + '_' + filename;
-
 			        console.log("Uploading: " + filename);
-			        console.log("Save to: " + path);
+			        console.log("Save to: " + rootPath);
 			        fstream = fs.createWriteStream(rootPath + path);
-			        file.pipe(fstream);
-			        fstream.on('close', function () {
-			        	newResume.resumeText = 'files/' + path;
-			        	newResume.save(function(err) {
-			        		if(err) {
-			        			console.log(err)
-			        			res.status(500).end();
-			        		} else {
-								res.send(newResume).end();
-			        		}
-			        	})
-			        });
+			        file.pipe(fstream);	
+
+			        newResume.resumeText = 'files/' + path;
 			    });
+
+			    //Need to use busboy to get param fields
+	    	    req.busboy.on('field', function(fieldname, val) {
+	    			newResume[fieldname] = val;
+	  			});
+
+	  			//Once busboy is done, save the mongodb resume object
+	    		req.busboy.on('finish', function() {
+		        	newResume.save(function(err) {
+		        		if(err) {
+		        			console.log(err)
+		        			res.status(500).end();
+		        		} else {
+							res.send(newResume).end();
+		        		}
+		        	})
+
+	    		})
 			}
 		});
 	}
@@ -104,30 +111,47 @@ exports.getResume = function (req,res) {
 		}
 	});
 }
-
+//req is the ajax request and what the back end recieves and response is the reply back
 exports.updateResume = function (req,res) {
 	if (req.user) {
-		var description = req.param('description')
-		var industry = req.param('industry')
-		var resumeText = req.param('resumeText')
+		var newData = {}; //This object will contain all the new resume info
 
-		Resume.findOneAndUpdate({
-			userId: req.user._id,
-			_id: req.params.id
-		}, {
-			description: description,
-			industry: industry,
-			resumeText: resumeText
-		}, function(err, resume) {
-			//if theres an error saving, notify the resume
-			if(err) {
-				console.log(err);
-				res.status(500).end();
-			} else {
-				//Otherwise, send the new resume object
-				res.send(resume).end();
-			}
-		});
+		var fstream;
+	    req.pipe(req.busboy);
+	    req.busboy.on('file', function (fieldname, file, filename) {
+	    	//If there was a file upload, save it to storage
+			var rootPath = process.env.OPENSHIFT_DATA_DIR || (__dirname + '/../files/');
+			var path = req.params.id + '_' + filename;
+	        console.log("Uploading: " + filename);
+	        console.log("Save to: " + rootPath);
+	        fstream = fs.createWriteStream(rootPath + path);
+	        file.pipe(fstream);
+
+	        //Save file path to our newData object
+	        newData.resumeText = 'files/' + path;
+	    });
+
+	    //Use busboy to get all the param fields
+	    req.busboy.on('field', function(fieldname, val) {
+	    	newData[fieldname] = val;
+	    });
+
+	    //On finish, find the resume in mongo and update its contents with the newData object
+	    req.busboy.on('finish', function() {
+			Resume.findOneAndUpdate({
+				userId: req.user._id,
+				_id: req.params.id
+			}, newData, function(err, resume) {
+				//if theres an error saving, notify the resume
+				if(err) {
+					console.log(err);
+					res.status(500).end();
+				} else {
+					//Otherwise, send the new resume object
+					res.send(resume).end();
+				}
+			});
+	    })
 	}
 	else {
 		console.log("User not signed in");

@@ -57,7 +57,6 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
 				$scope.resume = resume
 				$scope.industry = resume.industry
 				$scope.description = resume.description
-				$scope.resumeText = resume.resumeText
 				$linkedinFactory.refreshLinkedin()
 
 			}).

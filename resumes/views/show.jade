@@ -12,7 +12,7 @@ div(ng-controller='resumeShowController')
 	if user
 		.modal(ng-show='userId === resume.userId')
 			modal-dialog(show='modalShown', width='45%', height='60%', dialog-title='Edit Resume' on-close='logClose()')
-				form.pure-form.pure-form-aligned(ng-submit='editResume()')
+				form.pure-form.pure-form-aligned(ng-submit='editResume()', enctype="multipart/form-data")
 					fieldset
 						.pure-control-group
 							label(for='POST-industry') Industry:
