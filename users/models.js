@@ -8,7 +8,9 @@ var Schema       = mongoose.Schema;
 var UserSchema   = new Schema({
 	name: String,
 	linkedinId: String,
-	linkedInUrl: String
+	linkedInUrl: String, 
+	vote_count: 0,
+	voters: []
 });
 
 //get access to findOrCreate

@@ -29,6 +29,7 @@ div(ng-controller='ResumeListController')
               div(ng-if='resume.linkedInUrl')
                 script(type="IN/MemberProfile" data-id="{{resume.linkedInUrl}}" data-format="click" data-text="{{resume.userName}}" data-related="false")
               h2 {{resume.industry}}
+              i.fa.fa-arrow-up(ng-click="voteResume()")
               p {{resume.description}} 
               p {{resume.resumeText}} 
               p {{resume.date}}

@@ -40,6 +40,10 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
         	console.log("toggle")
         	$scope.modalShown = !$scope.modalShown;
         };
+
+        $scope.voteResume = function() {
+        	
+        }
 	     
 
 }]);

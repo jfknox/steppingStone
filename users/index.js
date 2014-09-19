@@ -14,7 +14,7 @@ app.set('view engine', 'jade');
 //have a get request sent to users/profile with the getProfile function
 app.get('/profile.html', controller.getProfile);
 
-
+//set up route with id, and set up get request to be called on it
 app.route('/:id').
 get(controller.getUser);
 

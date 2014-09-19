@@ -27,14 +27,17 @@ get(controller.getAllResumes).
 //post request on resume home to post a new resume with function defined in controller
 post(controller.createResume);
 
+
 //send requests to specific id of resumes
-app.route('/:id').
 //a get request that calls get resume from resume controller
-get(controller.getResume).
 //a put request that calls put resume from resume controller
-put(controller.updateResume).
 //a delete request that calls delete resume from resume controller
+app.route('/:id').
+get(controller.getResume).
+put(controller.updateResume).
 delete(controller.deleteResume);
+
+
 
 
 

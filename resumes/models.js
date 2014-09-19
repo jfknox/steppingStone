@@ -10,7 +10,9 @@ var ResumeSchema   = new Schema({
 	date: Date,
 	userId: String, 
 	userName: String, 
-	linkedInUrl: String
+	linkedInUrl: String, 
+	vote_count: 0,
+    voters: [] 
 
 });
 

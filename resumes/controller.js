@@ -5,7 +5,7 @@ var fs      = require('fs');
 
 //export get all resume function
 exports.getAllResumes = function(req, res) {
-	//if pass a user id then get all resumes for that id 
+	//if passed a user id in the request object then get all resumes for that id 
 	if(req.query.userId) {
 		//find all ids with the specified user id
 		Resume.find({userId: req.query.userId}, function (err, resumes) {
@@ -15,26 +15,28 @@ exports.getAllResumes = function(req, res) {
 		  	    res.status(500).end();
 		  	//respond by sending all of the resumes
    		    } else {
+   		    	//send resumes to angular
 			  	res.send(resumes).end();
 			}
 		});
 	} else{
-		//
+		//if there isn't a user then display all of the resumes
 		Resume.find(function (err, resumes) {
 			if (err) {
 	     	    console.log(err);
 		  	    res.status(500).end();
    		    } else {
+   		    	//send resumes
 			  	res.send(resumes).end();
 			}
 		});
 	}
 }
-
+//function that renders the resume index page pase the user in to have access in the index page
 exports.getResumeIndexTemplate = function(req, res) {
 	res.render('index', { title: 'Resume Index', user: req.user});
 }
-
+//resume that renders the resume show page
 exports.getResumeShowTemplate = function (req, res) {
 	res.render('show', {title: "Show Resume", user: req.user});
 }
@@ -100,7 +102,7 @@ exports.createResume = function (req,res) {
 		res.status(500).end();
 	}
 }
-
+//function to get resume
 exports.getResume = function (req,res) {
 	Resume.findById(req.params.id, function(err, resume) {
 		if(err) {
@@ -114,8 +116,8 @@ exports.getResume = function (req,res) {
 //req is the ajax request and what the back end recieves and response is the reply back
 exports.updateResume = function (req,res) {
 	if (req.user) {
-		var newData = {}; //This object will contain all the new resume info
-
+		var newData = {}; //This object will contain all the new resume info need to do this for update 
+		//bussboy code
 		var fstream;
 	    req.pipe(req.busboy);
 	    req.busboy.on('file', function (fieldname, file, filename) {
@@ -138,6 +140,7 @@ exports.updateResume = function (req,res) {
 
 	    //On finish, find the resume in mongo and update its contents with the newData object
 	    req.busboy.on('finish', function() {
+			//find resume with the user id from the req and then find the specific resume
 			Resume.findOneAndUpdate({
 				userId: req.user._id,
 				_id: req.params.id
@@ -159,7 +162,9 @@ exports.updateResume = function (req,res) {
 	}
 }
 
+//delete resume 
 exports.deleteResume = function (req,res) {
+
 	if (req.user) {
 		console.log('delete resume enter')
 		Resume.findOneAndRemove({
@@ -190,5 +195,55 @@ exports.deleteResume = function (req,res) {
 		res.status(500).end();
 	}
 }
+
+
+
+// exports.upvoteResume = function(req, res){
+// 	console.log(req)
+// 	console.log('start up vote')
+// 	// Get the user id who's voting
+// 	userId = req.user._id;
+// 	console.log(userId)
+// 	// This query succeeds only if the voters array doesn't contain the user
+// 	Resume.query = {_id: ObjectId(UserId), voters: {'$ne': UserId}};
+// 	console.log(voters)
+// 	console.log(vote_count
+// 	// Update to add the user to the array and increment the number of votes.
+// 	Resume.update = {'$push': {'voters': UserId}, '$inc': {vote_count: 1}}
+
+// 	db.resumes.update(query, update);
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

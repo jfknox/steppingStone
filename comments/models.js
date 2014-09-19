@@ -9,7 +9,9 @@ var CommentSchema   = new Schema({
 	userId: String, 
 	userName: String, 
 	resumeId: String,
-	linkedInUrl: String
+	linkedInUrl: String, 
+	vote_count: 0,
+	voters: []
 
 });
 
