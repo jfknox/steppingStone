@@ -128,6 +128,13 @@ background: rgb(202, 60, 60); /* this is a maroon */
   height:35px;
   width: auto;
 }
+#logo:hover {
+  -webkit-filter: invert(.7);
+  filter: invert(.7);
+ /* background: rgba(78, 124, 168, 1) ;
+  opacity: .8;*/
+
+}
 .navItems{
   margin-top: .6em;
 }
@@ -302,4 +309,32 @@ background: rgb(202, 60, 60); /* this is a maroon */
   opacity: 1;
 }
 
+#pdf {
+  margin-left: 5px; 
+}
+
+.width {
+  width: 90%;
+}
+
+.comment-button {
+background-color: rgba(153, 153, 153, .8 );
+color: white;
+padding: 0.5em 2em;
+border-radius: 5px;
+}
+.comment-button:hover {
+background-color: rgba(153, 153, 153, 1);
+color: white;
+padding: 0.5em 2em;
+border-radius: 5px;
+}
 /*==== End Responsiveness ====*/
+
+.modalinput {
+  margin-left: 15px;
+}
+
+.modalsize {
+  min-width: 300px
+}

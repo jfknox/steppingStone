@@ -4,19 +4,20 @@ div(ng-controller='ResumeListController')
       #resumewrapper
       if user
         br
-        modal-dialog(show='modalShown', width='45%', height='60%', dialog-title='New Resume' on-close='logClose()')
-          form.pure-form.pure-form-aligned(ng-submit='newResume()', enctype="multipart/form-data")
-            fieldset
-            .pure-control-group
-              label(for='POST-industry') Industry:
-              input#POST-industry(type='text', ng-model='$parent.industry') 
-            .pure-control-group
-              label(for='POST-description') Description:
-              input#POST-description(type='text', ng-model='$parent.description')
-            .pure-control-group
-                input(type="file", name="file", id="file", onchange="angular.element(this).scope().uploadFile(this.files)")
-            .pure-controls
-              button.pure-button.pure-button-primary(type='submit') Save Resume 
+        modal-dialog(show='modalShown', width='28%', height='auto', dialog-title='New Resume' on-close='logClose()')
+          .display
+            form.pure-form.pure-form-aligned(ng-submit='newResume()', enctype="multipart/form-data")
+              fieldset
+              .pure-control-group
+                label(for='POST-industry') Industry:
+                input#POST-industry(type='text', ng-model='$parent.industry') 
+              .pure-control-group
+                label(for='POST-description') Description:
+                input#POST-description(type='text', ng-model='$parent.description')
+              .pure-control-group
+                  input(type="file", name="file", id="file", onchange="angular.element(this).scope().uploadFile(this.files)")
+              .pure-controls
+                button.pure-button.pure-button-primary(type='submit') Save Resume 
 
         .profileresumes.sidebar
           br
