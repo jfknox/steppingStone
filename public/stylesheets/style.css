@@ -135,15 +135,6 @@ background: rgb(202, 60, 60); /* this is a maroon */
 /*==== Start Responsiveness ====*/
 
 
-.columns {
-  -webkit-column-gap: 10px;
-  -webkit-column-fill: auto;
-  -moz-column-gap: 10px;
-  -moz-column-fill: auto;
-  column-gap: 15px;
-  column-fill: auto;
-}
-
 .display {
   display: inline-block;
   background: #FEFEFE;
@@ -196,77 +187,9 @@ background: rgb(202, 60, 60); /* this is a maroon */
 }
 
 
-/* Smaller than standard 960 (devices and browsers) */
-@media only screen and (max-width: 959px) {
-  .leftcolumns {
-  width: 20%;
-  }
-}
 
-/* Tablet Portrait size to standard 960 (devices and browsers) */
-@media only screen and (min-width: 768px) and (max-width: 959px) {
-  .leftcolumns {
-  width: 20%;
-  }
-}
 
-/* All Mobile Sizes (devices and browser) */
-@media only screen and (max-width: 767px) {
-  .leftcolumns {
-  width: 20%;
-  }
-}
 
-/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-  .leftcolumns {
-  width: 20%;
-  }
-}
-
-/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
-@media only screen and (max-width: 479px) {
-  .leftcolumns {
-  width: 20%;
-  }
-}
-
-/* Smaller than standard 960 (devices and browsers) */
-@media only screen and (max-width: 959px) {
-  .rightcolumns {
-  width: 80%;
-  }
-}
-
-/* Tablet Portrait size to standard 960 (devices and browsers) */
-@media only screen and (min-width: 768px) and (max-width: 959px) {
-  .rightcolumns {
-  width: 70%;
-  }
-}
-
-/* All Mobile Sizes (devices and browser) */
-@media only screen and (max-width: 767px) {
-  .rightcolumns {
-  width: 60%;
-  }
-}
-
-/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-  .rightcolumns {
-  width: 50%;
-  }
-}
-
-/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
-@media only screen and (max-width: 479px) {
-  .rightcolumns {
-  width: 40%;
-  }
-}
-
-/*==== End Responsiveness ====*/
 #resumewrapper {
   position: relative;
   width: 100%;
@@ -279,6 +202,7 @@ background: rgb(202, 60, 60); /* this is a maroon */
   opacity: 0.8;
 }
 
+@media screen and (min-width: 976px) {
 .profileresumes {
   position: fixed;
   top: 0;
@@ -286,35 +210,85 @@ background: rgb(202, 60, 60); /* this is a maroon */
   height: 100%;
   width:20%;
   background-color: #D9DADE ;
-  min-width: 200px;
+}
 }
 
+
+@media screen and (max-width: 975px) {
+  .profileresumes {
+    position:relative;
+    min-width: 100%;
+    margin: 1%;
+    border-radius: 1em;
+  }
+
+}
+
+@media screen and (min-width: 975px) {
 .resumes {
   float: right;
   left: 30%;
   width: 80%;
   height: 100%;
 }
+}
 
-.content {
-    padding: 2em 3em 0;
-    margin-left: 25%;
+@media screen and (max-width: 975px) {
+.resumes {
+  clear:none;
+  width: 100%;
+
+}
+}
+
+
+@media screen and (min-width: 1301px) {
+.profileuser {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width:400px;
+  background-color: #D9DADE ;
+}
+}
+
+
+@media screen and (max-width: 1300px) {
+  .profileuser {
+    position:relative;
+    width: 100%;
+    min-width: 385px;
+    border-radius: 1em;
+  }
+
+}
+
+@media screen and (min-width: 1301px) {
+.userdata {
+  float: right;
+  width: 70%;
+}
+}
+
+@media screen and (max-width: 1300px) {
+.userdata {
+  clear:none;
+  width: 100%;
+
+}
 }
 
 .sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
+  display: inline-block;
+  background: #FEFEFE;
+  border: 2px solid #FAFAFA;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  margin: 0 2px 15px;
+  padding: 15px;
+  padding-bottom: 5px;
+  background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
+  opacity: 1;
 }
 
-@media (min-width: 48em) {
-    .content {
-        padding: 2em 3em 0;
-        margin-left: 25%;
-    }
-
-    .sidebar {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-    }
+/*==== End Responsiveness ====*/
