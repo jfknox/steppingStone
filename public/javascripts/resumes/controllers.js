@@ -27,6 +27,7 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
 				success(function (newResume) {
 					console.log("new Success");
 					$location.path('/resumes/' + newResume._id);
+					
 				}).
 				error(function() {
 					console.log("new error")
@@ -41,14 +42,29 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
         	$scope.modalShown = !$scope.modalShown;
         };
 
-	     
+	    $scope.formatDate = function(date) {
+			return date.replace(/\T.+/, "")
+		}
+
+		$scope.upVoteResume = function(resume) {
+			console.log('vote resume')
+			$resumeFactory.upVoteResume(resume._id).
+				success(function (voteResume) {
+					console.log("vote Success");
+					resume.vote_count = voteResume.vote_count
+					;
+				}).
+				error(function() {
+					console.log("vote error")
+				})		
+		}
+
 
 }]);
 
 
 steppingStoneControllers.controller('resumeShowController', ['$scope', '$routeParams', '$cookies', '$location', 'resumeFactory', 'commentFactory', 'linkedinFactory',
 	function($scope, $routeParams, $cookies, $location, $resumeFactory, $commentFactory, $linkedinFactory) {
-		console.log('resume show controller')
 
 		$scope.userId = $cookies.userId;
 		$scope.modalShown = false
@@ -140,6 +156,11 @@ steppingStoneControllers.controller('resumeShowController', ['$scope', '$routePa
         	console.log("toggle")
         	$scope.modalShown = !$scope.modalShown;
         };
+
+        $scope.formatDate = function(date) {
+			return date.replace(/\T.+/, "")
+		}
+	   
 	     
 	}
 

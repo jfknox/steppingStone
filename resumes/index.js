@@ -28,6 +28,10 @@ get(controller.getAllResumes).
 post(controller.createResume);
 
 
+app.route('/vote/:id').
+put(controller.upVoteResume);
+
+
 //send requests to specific id of resumes
 //a get request that calls get resume from resume controller
 //a put request that calls put resume from resume controller

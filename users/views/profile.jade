@@ -21,7 +21,7 @@ div(ng-controller='usersController')
 								.tile
 									p Industry: {{resume.industry}}
 									p Description: {{resume.description}}
-									p Date Uploaded: {{resume.date}}
+									p Date Uploaded: {{formatDate(resume.date)}}
 									a.pure-button(href="#/resumes/{{resume._id}}") Show
 									hr
 						.display.userdata
@@ -29,7 +29,7 @@ div(ng-controller='usersController')
 							div(x-ng-repeat="comment in comments | filter:searchText")
 								.tile
 									p {{comment.content}}
-									p {{comment.date}}
+									p {{formatDate(comment.date)}}
 									a.pure-button(href="#/resumes/{{comment.resumeId}}") Show
 									hr
 										

@@ -3,7 +3,6 @@ app.factory('commentFactory', function($http) {
         getAllComments: function(id, isResumeId) {
             //if there is a resume id leave all coments related to the resume
             if (isResumeId) {
-                console.log(id + "factory")
                 return $http.get('/comments/', {
                     params: {resumeId: id}
                 });

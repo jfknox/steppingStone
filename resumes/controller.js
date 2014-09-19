@@ -44,12 +44,14 @@ exports.getResumeShowTemplate = function (req, res) {
 exports.createResume = function (req,res) {
 	// save entry first to gain access to the resumeId for unique uploads
 	if (req.user) {
-		var date = new Date().toISOString().replace(/\T.+/, '');
+		var vote_count = 0
+		var date = new Date();
 		var userId = req.user._id;
 		var userName = req.user.name;
 		var linkedInUrl = req.user.linkedInUrl;
 		//Create new resume by following the schema we created in the model
 		var newResume = new Resume({
+			vote_count: 0,
 			date: date,
 			userId: userId, 
 			userName: userName,
@@ -198,21 +200,32 @@ exports.deleteResume = function (req,res) {
 
 
 
-// exports.upvoteResume = function(req, res){
-// 	console.log(req)
-// 	console.log('start up vote')
-// 	// Get the user id who's voting
-// 	userId = req.user._id;
-// 	console.log(userId)
-// 	// This query succeeds only if the voters array doesn't contain the user
-// 	Resume.query = {_id: ObjectId(UserId), voters: {'$ne': UserId}};
-// 	console.log(voters)
-// 	console.log(vote_count
-// 	// Update to add the user to the array and increment the number of votes.
-// 	Resume.update = {'$push': {'voters': UserId}, '$inc': {vote_count: 1}}
+exports.upVoteResume = function(req, res){
+	console.log('start up vote')
+	var userId = req.user._id
+	var resumeId = req.params.id
+	Resume.findOneAndUpdate( {_id : resumeId}, function(err, resume) {
+		if (err){
+			console.log('vote error')
+			res.status(500).end();
+		} else{
+			resume.vote_count = resume.vote_count + 1
+			resume.save( function(err) {
+				if(err){
+					console.log("vote save error")
+					res.status(500).end();
+				}else{
+					res.send(resume).end();
+				}
 
-// 	db.resumes.update(query, update);
-// }
+			})
+		}
+	})
+}
+
+
+
+
 
 
 

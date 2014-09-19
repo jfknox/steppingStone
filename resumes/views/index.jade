@@ -33,10 +33,13 @@ div(ng-controller='ResumeListController')
           div(x-ng-repeat="resume in resumes | filter:searchText")
             .tile
               .display.resumes
+                i.fa.fa-arrow-up(ng-click="upVoteResume(resume)")
+                div Votes: {{resume.vote_count}}
                 div(ng-if='resume.linkedInUrl')
                   script(type="IN/MemberProfile" data-id="{{resume.linkedInUrl}}" data-format="click" data-text="{{resume.userName}}" data-related="false")
                 h2 Industry: {{resume.industry}}
-                p Description: {{resume.description}}  
-                p Date Uploaded: {{resume.date}}
+                p Description: {{resume.description}} 
+                hr 
+                p Date Uploaded: {{formatDate(resume.date)}}
                 a.pure-button(href="#/resumes/{{resume._id}}") Show
 

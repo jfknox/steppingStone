@@ -7,6 +7,10 @@ steppingStoneControllers.controller('usersController', ['$scope', '$routeParams'
 	
 	$scope.userId = $cookies.userId;
 
+	$scope.formatDate = function(date) {
+		return date.replace(/\T.+/, "")
+	}
+	   
 
 	$resumeFactory.getAllResumes($scope.userId).
 		success(function (resumes) {

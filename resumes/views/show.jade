@@ -8,6 +8,7 @@ div(ng-controller='resumeShowController')
 	h3.industry {{resume.industry}}
 	div#commentTile
 		.description {{resume.description}}
+	p.date {{formatDate(resume.date)}}
 
 	if user
 		.modal(ng-show='userId === resume.userId')
@@ -47,7 +48,7 @@ div(ng-controller='resumeShowController')
 					h4 {{comment.userName}}
 				div#commentTile
 					p {{comment.content}}
-					p {{comment.date}}
+					p {{formatDate(comment.date)}}
 				button.pure-button.button-error#commentdelete(ng-show='userId === comment.userId', ng-click= "deleteComment(comment._id)") Delete
 	div#comments
 
