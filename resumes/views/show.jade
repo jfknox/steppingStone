@@ -29,7 +29,7 @@ div(ng-controller='resumeShowController')
 			button.pure-button(ng-click='toggleModal()') Resume Options	
 	
 	div#viewWindow
-		object(data='{{resume.resumeText}}', type='application/pdf')
+		object#resumePDF(data='{{resume.resumeText}}', type='application/pdf')
 	a.pure-button(href='{{resume.resumeText}}') Download pdf
 		
 	form(role='search', ng-show="comments")
