@@ -19,10 +19,9 @@ div(ng-controller='usersController')
 							h1 Posted Resumes
 							div(x-ng-repeat="resume in resumes | filter:searchText")
 								.tile
-									p {{resume.industry}}
-									p {{resume.description}}
-									p {{resume.resumeText}}
-									p {{resume.date}}
+									p Industry: {{resume.industry}}
+									p Description: {{resume.description}}
+									p Date Uploaded: {{resume.date}}
 									a.pure-button(href="#/resumes/{{resume._id}}") Show
 									hr
 						.display.userdata

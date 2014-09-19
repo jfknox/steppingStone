@@ -44,7 +44,7 @@ exports.getResumeShowTemplate = function (req, res) {
 exports.createResume = function (req,res) {
 	// save entry first to gain access to the resumeId for unique uploads
 	if (req.user) {
-		var date = new Date();
+		var date = new Date().toISOString().replace(/\T.+/, '');
 		var userId = req.user._id;
 		var userName = req.user.name;
 		var linkedInUrl = req.user.linkedInUrl;
