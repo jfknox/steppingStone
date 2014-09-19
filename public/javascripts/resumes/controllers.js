@@ -41,9 +41,6 @@ steppingStoneControllers.controller('ResumeListController', ['$scope', '$routePa
         	$scope.modalShown = !$scope.modalShown;
         };
 
-        $scope.voteResume = function() {
-        	
-        }
 	     
 
 }]);
