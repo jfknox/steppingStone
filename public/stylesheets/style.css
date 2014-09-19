@@ -136,6 +136,17 @@ background: rgb(202, 60, 60); /* this is a maroon */
   margin-top: .6em;
 }
 
+#resumePDF{
+  width: 100%;
+  height: 100%;
+}
+.splash-head{
+  background-color:rgba(0,0,0,0.6); 
+}
+.pure-img-responsive{
+  border-radius: 5px;
+}
+
 /*==== Start Responsiveness ====*/
 
 
