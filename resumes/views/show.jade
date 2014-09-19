@@ -1,14 +1,14 @@
-
-
+br
 div(ng-controller='resumeShowController')   
 	div(ng-if='resume.linkedInUrl')
 		script(type="IN/MemberProfile" data-id="{{resume.linkedInUrl}}" data-format="inline" data-related="false")
+	br
 	script(type="IN/Share")
-	hr
-	h3.industry {{resume.industry}}
-	div#commentTile
-		.description {{resume.description}}
-
+	br
+	br
+	.display.width
+		h3 Industry: {{resume.industry}}
+			p Description: {{resume.description}}
 	if user
 		.modal(ng-show='userId === resume.userId')
 			modal-dialog(show='modalShown', width='45%', height='60%', dialog-title='Edit Resume' on-close='logClose()')
@@ -27,39 +27,38 @@ div(ng-controller='resumeShowController')
 				.pure-controls
 					button.pure-button.button-error(ng-click= "deleteResume()") Delete
 			button.pure-button(ng-click='toggleModal()') Resume Options	
-	
+			button.pure-button#pdf(href='{{resume.resumeText}}') Download pdf
+	br
 	div#viewWindow
 		object#resumePDF(data='{{resume.resumeText}}', type='application/pdf')
-	a.pure-button(href='{{resume.resumeText}}') Download pdf
-		
 	form(role='search', ng-show="comments")
 		div#commentSpace
 		.form-group
 			input#search(type='text', placeholder='Search in Comments', ng-model='searchText')
+	br
 	article
 		header
-			div#commentSpace
 			div(x-ng-repeat="comment in comments | filter:searchText")
-				.tile
-				div(ng-if='comment.linkedInUrl')
-					script(type="IN/MemberProfile" data-id="{{comment.linkedInUrl}}" data-format="click" data-text="{{comment.userName}}" data-related="false")
-				div(ng-if='!comment.linkedInUrl')
-					h4 {{comment.userName}}
-				div#commentTile
-					p {{comment.content}}
-					p {{comment.date}}
-				button.pure-button.button-error#commentdelete(ng-show='userId === comment.userId', ng-click= "deleteComment(comment._id)") Delete
-	div#comments
+				.display.width
+					.tile
+					div(ng-if='comment.linkedInUrl')
+						script(type="IN/MemberProfile" data-id="{{comment.linkedInUrl}}" data-format="click" data-text="{{comment.userName}}" data-related="false")
+					div(ng-if='!comment.linkedInUrl')
+						h4 {{comment.userName}}
+					div#commentTile
+						p Comment: {{comment.content}}
+						p Date: {{comment.date}}
+					button.pure-button.button-error#commentdelete(ng-show='userId === comment.userId', ng-click= "deleteComment(comment._id)") Delete
 
-		if user
-			div#commentSpace
-			form(ng-submit='createComment()')
-				.pure-u-1
-					textarea.pure-input-1(rows="6" cols="70" ng-model='content' placeholder="Comment here!!")
-				label.pure-checkbox
-					input#private(type="checkbox", ng-model="anonymous")
-					| Post Anonymously?	
-				div#commentSpace.pure-controls
-					button#show-button.pure-button(type='submit') Leave Comment
-			
-			
+	if user
+		div#commentSpace
+		form(ng-submit='createComment()')
+			.pure-u-1
+				textarea.pure-input-1(rows="6" cols="70" ng-model='content' placeholder="Comment here!!")
+			label.pure-checkbox
+				input#private(type="checkbox", ng-model="anonymous")
+				| Post Anonymously?	
+			div#commentSpace.pure-controls
+				button.comment-button(type='submit') Leave Comment
+		
+		
