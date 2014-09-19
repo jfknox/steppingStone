@@ -74,7 +74,6 @@ ul li {
     list-style: square;
   }
 
-
 #home-background-image{
 
   background: url(/imgAssets/stepping_stones.jpg);
@@ -97,12 +96,9 @@ ul li {
   padding-left: 10px;
 }
 
-
 div.view-container{
   padding: 40px;
 }
-
-
 
 .resume-container{
   border-bottom: 2px solid gray; 
@@ -149,15 +145,6 @@ background: rgb(202, 60, 60); /* this is a maroon */
 
 /*==== Start Responsiveness ====*/
 
-
-.columns {
-  -webkit-column-gap: 10px;
-  -webkit-column-fill: auto;
-  -moz-column-gap: 10px;
-  -moz-column-fill: auto;
-  column-gap: 15px;
-  column-fill: auto;
-}
 
 .display {
   display: inline-block;
@@ -210,11 +197,109 @@ background: rgb(202, 60, 60); /* this is a maroon */
   }
 }
 
-/*==== End Responsiveness ====*/
 
 
+
+
+#resumewrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding: 0;
+}
 
 .display:not(:hover) {
   opacity: 0.8;
 }
 
+@media screen and (min-width: 976px) {
+.profileresumes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width:20%;
+  background-color: #D9DADE ;
+}
+}
+
+
+@media screen and (max-width: 975px) {
+  .profileresumes {
+    position:relative;
+    min-width: 100%;
+    margin: 1%;
+    border-radius: 1em;
+  }
+
+}
+
+@media screen and (min-width: 975px) {
+.resumes {
+  float: right;
+  left: 30%;
+  width: 80%;
+  height: 100%;
+}
+}
+
+@media screen and (max-width: 975px) {
+.resumes {
+  clear:none;
+  width: 100%;
+
+}
+}
+
+
+@media screen and (min-width: 1301px) {
+.profileuser {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width:400px;
+  background-color: #D9DADE ;
+}
+}
+
+
+@media screen and (max-width: 1300px) {
+  .profileuser {
+    position:relative;
+    width: 100%;
+    min-width: 385px;
+    border-radius: 1em;
+  }
+
+}
+
+@media screen and (min-width: 1301px) {
+.userdata {
+  float: right;
+  width: 70%;
+}
+}
+
+@media screen and (max-width: 1300px) {
+.userdata {
+  clear:none;
+  width: 100%;
+
+}
+}
+
+.sidebar {
+  display: inline-block;
+  background: #FEFEFE;
+  border: 2px solid #FAFAFA;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  margin: 0 2px 15px;
+  padding: 15px;
+  padding-bottom: 5px;
+  background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
+  opacity: 1;
+}
+
+/*==== End Responsiveness ====*/

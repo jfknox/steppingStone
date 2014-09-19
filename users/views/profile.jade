@@ -1,35 +1,36 @@
 div(ng-controller='usersController')
 	if user
 		#main-container
-			#main.wrapper.clearfix
+			#main
+				#resumewrapper
 				article
 					header
 						br
-						.columns
-							.display
-								h1= title
-								div(ng-if='linkedInUrl')
-									script(type="IN/MemberProfile" data-id="{{linkedInUrl}}" data-format="inline" data-related="false")
-								form(role='search' ng-show="resumes || comments")
-									.form-group
-										input#search(type='text', placeholder='Resume Search', ng-model='searchText')
-						.columns
-							.display
-								h1 Posted Resumes
-								div(x-ng-repeat="resume in resumes | filter:searchText")
-									.tile
-										p {{resume.industry}}
-										p {{resume.description}}
-										p {{resume.resumeText}}
-										p {{resume.date}}
-										a.pure-button(href="#/resumes/{{resume._id}}") Show
-						.columns
-							.display
-								h1 Posted Comments
-								div(x-ng-repeat="comment in comments | filter:searchText")
-									.tile
-										p {{comment.content}}
-										p {{comment.date}}
-										a.pure-button(href="#/resumes/{{comment.resumeId}}") Show
+						.display.profileuser
+							br
+							br
+							h1= title
+							div(ng-if='linkedInUrl')
+								script(type="IN/MemberProfile" data-id="{{linkedInUrl}}" data-format="inline" data-related="false")
+							form(role='search' ng-show="resumes || comments")
+								.form-group
+									input#search(type='text', placeholder='Resume Search', ng-model='searchText')
+						.display.userdata
+							h1 Posted Resumes
+							div(x-ng-repeat="resume in resumes | filter:searchText")
+								.tile
+									p Industry: {{resume.industry}}
+									p Description: {{resume.description}}
+									p Date Uploaded: {{resume.date}}
+									a.pure-button(href="#/resumes/{{resume._id}}") Show
+									hr
+						.display.userdata
+							h1 Posted Comments
+							div(x-ng-repeat="comment in comments | filter:searchText")
+								.tile
+									p {{comment.content}}
+									p {{comment.date}}
+									a.pure-button(href="#/resumes/{{comment.resumeId}}") Show
+									hr
 										
 

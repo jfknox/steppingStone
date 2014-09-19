@@ -38,7 +38,6 @@ app.factory('resumeFactory', function($http) {
             return $http.delete(/resumes/ + id)
         }
 
-       
 
 
 

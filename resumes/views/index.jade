@@ -1,8 +1,9 @@
-h1= title
 div(ng-controller='ResumeListController')
   #main-container
-    #main.wrapper.clearfix
+    #main
+      #resumewrapper
       if user
+        br
         modal-dialog(show='modalShown', width='45%', height='60%', dialog-title='New Resume' on-close='logClose()')
           form.pure-form.pure-form-aligned(ng-submit='newResume()', enctype="multipart/form-data")
             fieldset
@@ -15,23 +16,27 @@ div(ng-controller='ResumeListController')
             .pure-control-group
                 input(type="file", name="file", id="file", onchange="angular.element(this).scope().uploadFile(this.files)")
             .pure-controls
-              button.pure-button.pure-button-primary(type='submit') Save Resume
-        button.pure-button(ng-click='toggleModal()') Upload Resume
+              button.pure-button.pure-button-primary(type='submit') Save Resume 
 
-      form(role='search' ng-show="resumes")
-        .form-group
-          input#search(type='text', placeholder='Resume Search', ng-model='searchText')
-
+        .profileresumes.sidebar
+          br
+          br
+          h1= title
+          button.pure-button(ng-click='toggleModal()', width: 20%) Upload A Resume
+          br    
+          p Or
+          form(role='search' ng-show="resumes")
+            .form-group
+              input#search(type='text', placeholder='Search through Resumes', ng-model='searchText',)
       article
         header
           div(x-ng-repeat="resume in resumes | filter:searchText")
             .tile
-              div(ng-if='resume.linkedInUrl')
-                script(type="IN/MemberProfile" data-id="{{resume.linkedInUrl}}" data-format="click" data-text="{{resume.userName}}" data-related="false")
-              h2 {{resume.industry}}
-              i.fa.fa-arrow-up(ng-click="voteResume()")
-              p {{resume.description}} 
-              p {{resume.resumeText}} 
-              p {{resume.date}}
-              a#show-button.pure-button(href="#/resumes/{{resume._id}}") Show
+              .display.resumes
+                div(ng-if='resume.linkedInUrl')
+                  script(type="IN/MemberProfile" data-id="{{resume.linkedInUrl}}" data-format="click" data-text="{{resume.userName}}" data-related="false")
+                h2 Industry: {{resume.industry}}
+                p Description: {{resume.description}}  
+                p Date Uploaded: {{resume.date}}
+                a.pure-button(href="#/resumes/{{resume._id}}") Show
 
