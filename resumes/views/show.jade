@@ -11,21 +11,23 @@ div(ng-controller='resumeShowController')
 			p Description: {{resume.description}}
 	if user
 		.modal(ng-show='userId === resume.userId')
-			modal-dialog(show='modalShown', width='45%', height='60%', dialog-title='Edit Resume' on-close='logClose()')
-				form.pure-form.pure-form-aligned(ng-submit='editResume()', enctype="multipart/form-data")
-					fieldset
-						.pure-control-group
-							label(for='POST-industry') Industry:
-							input#POST-industry(type='text', ng-model='$parent.industry') 
-						.pure-control-group
-							label(for='POST-description') Description:
-							input#POST-description(type='text', ng-model='$parent.description')
-						.pure-control-group
-							input(type="file", name="file", id="file", onchange="angular.element(this).scope().uploadFile(this.files)")
-						.pure-controls
-							button#show-button.pure-button(type='submit') Update Resume
-				.pure-controls
-					button.pure-button.button-error(ng-click= "deleteResume()") Delete
+			modal-dialog(show='modalShown', width='28%', height='auto', dialog-title='Edit Resume' on-close='logClose()')
+				.display
+					form.pure-form.pure-form-aligned(ng-submit='editResume()', enctype="multipart/form-data")
+						fieldset
+							.pure-control-group
+								label(for='POST-industry') Industry:
+								input#POST-industry(type='text', ng-model='$parent.industry') 
+							.pure-control-group
+								label(for='POST-description') Description:
+								input#POST-description(type='text', ng-model='$parent.description')
+							.pure-control-group
+								input(type="file", name="file", id="file", onchange="angular.element(this).scope().uploadFile(this.files)")
+					.pure-controls
+						button.pure-button(type='submit') Update Resume
+					br
+					.pure-controls
+						button.pure-button.button-error(ng-click= "deleteResume()") Delete
 			button.pure-button(ng-click='toggleModal()') Resume Options	
 			button.pure-button#pdf(href='{{resume.resumeText}}') Download pdf
 	br

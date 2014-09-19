@@ -323,3 +323,11 @@ padding: 0.5em 2em;
 border-radius: 5px;
 }
 /*==== End Responsiveness ====*/
+
+.modalinput {
+  margin-left: 15px;
+}
+
+.modalsize {
+  min-width: 300px
+}
